@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+// import './App.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, InputGroup, FormControl } from 'react-bootstrap';
+import Examples from './examples-from-bootstrap';
+import {fetchWeather} from './redux/reducer';
+import { connect } from 'react-redux';
 
-function App() {
+function App({fetchWeather}) {
+
+useEffect(() => {
+  fetchWeather();
+}, [])
+
+
+// new
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Examples /> */}
+
+
+      <InputGroup className="mb-3">
+        <FormControl
+          placeholder="Recipient's username"
+          aria-label="Recipient's username"
+          aria-describedby="basic-addon2"
+        />
+        <InputGroup.Append>
+          <Button variant="outline-secondary" onClick={() => fetchWeather()}>Find</Button>
+        </InputGroup.Append>
+      </InputGroup>
+
+
+
     </div>
   );
 }
 
-export default App;
+
+const getStateToProps = (state) => (
+  {
+    weather: state.weather.weather
+  }
+)
+
+
+
+
+
+export default App = connect(getStateToProps, {
+  fetchWeather
+})(App);
