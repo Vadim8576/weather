@@ -58,17 +58,17 @@ export const authentication = () => async (dispatch) => {
 
 
 
-export const  getToken = () => async (dispatch) => {
+export const  getToken = () => (dispatch) => {
     alert();
-        return await api.getToken()
+        return api.getToken()
             .then(request_token => {
                 console.log(request_token);
                 dispatch(getTokenAC(request_token));
             })
 }
 
-export const createSession =  (request_token) => async (dispatch) => {
-    return await api.createSession()
+export const createSession =  (request_token) => (dispatch) => {
+    return api.createSession()
         .then(session_id => {
             console.log(session_id);
         })
