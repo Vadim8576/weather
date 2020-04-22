@@ -5,10 +5,10 @@ import {getToken} from '../../redux/reducer';
 
 
 
-const MainPage = ({getToken}) => {
+const MainPage = () => {
 
     useEffect(() => {
-        getToken();
+        // getToken();
       }, [])
 
     return (
@@ -36,8 +36,6 @@ const getStateToProps = (state) => (
   )
   
 
-const MainPageContainer = connect(getStateToProps, {
-    getToken
-  })(MainPage);
+const MainPageContainer = connect(getStateToProps, null)(MainPage);
 
   export default MainPageContainer;

@@ -27,7 +27,7 @@ export const api = {
        
         return instanse
                 .post('session/new?'+api_key, request_token)
-                .then(response => response.data.session_id)
+                .then(response => response)
 
                 // {
                 //     "success": true,

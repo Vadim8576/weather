@@ -39,31 +39,54 @@ export const auth_is_success = () => ( {type: AUTH_IS_SUCCES} );
 
 
 
-export const authentication = () => async (dispatch) => {
+// export const authentication = () => (dispatch) => {
    
-    const request_token = getToken();
-    const session_id = createSession(request_token);
+//     getToken().
+//         then(request_token => {
+//             const session_id = createSession(request_token);
+//             let request_body = {
+//                 "username": 'ZhVA',
+//                 "password": 'vadik250783',
+//                 "request_token": request_token
+//             }
+//             getAuth(request_body);
+//             console.log(session_id);
+//         })
+    
+// }
 
 
-    let request_body = {
-        "username": 'ZhVA',
-        "password": 'vadik250783',
-        "request_token": request_token
-    }
-    getAuth(request_body);
-}
 
 
 
 
-
-
-export const  getToken = () => (dispatch) => {
-    alert();
+export const authentication = () => (dispatch) => {
+    // alert();
         return api.getToken()
             .then(request_token => {
-                console.log(request_token);
+               
                 dispatch(getTokenAC(request_token));
+
+
+                
+
+
+                console.log({request_token});
+
+                api.createSession(request_token)
+                    .then(session_id => {
+                        console.log(session_id);
+                    });
+                
+
+                let request_body = {
+                    "username": 'ZhVA',
+                    "password": 'vadik250783',
+                    "request_token": request_token
+                }
+
+                getAuth(request_body);
+                    
             })
 }
 
