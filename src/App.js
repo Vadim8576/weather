@@ -1,47 +1,62 @@
 import React, { useEffect } from 'react';
 // import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, InputGroup, FormControl } from 'react-bootstrap';
+
 import Examples from './examples-from-bootstrap';
-import {fetchWeather} from './redux/reducer';
 import { connect } from 'react-redux';
+import HeaderContainer from './components/header/HeaderContainer';
+import MainPageContainer from './components/mainPage/MainPageContainer';
+import Login from './components/login/Login';
+import { getAuth } from './redux/reducer';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Profile from './components/mainPage/prifilePage/ProfilePageContainer';
 
-function App({fetchWeather}) {
+function App({ fetchWeather, ...props }) {
 
-useEffect(() => {
-  fetchWeather();
-}, [])
-
-
-// new
 
 
   return (
-    <div className="App">
-      {/* <Examples /> */}
+    <>
+      <HeaderContainer />
+      <Container>
+        <Row className="justify-content-md-center">
+          <Col>
+            <div className="App">
+
+              <Switch>
+                <Route exact path='/' render={() => <Redirect to={'/main'} />} />
+                <Route exact path='/login' render={() =>
+                  <Login
+                    getAuth={props.getAuth}
+                    request_token={props.request_token}
+                  />}
+                />
+                <Route exact path='/main' render={() =>
+                  <MainPageContainer />}
+                />
+                <Route exact path='/profile' render={() =>
+                  <Profile />}
+                />
+                <Route path='/*' render={() => <Redirect to={'/main'} />} />
+              </Switch>
 
 
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Recipient's username"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-        />
-        <InputGroup.Append>
-          <Button variant="outline-secondary" onClick={() => fetchWeather()}>Find</Button>
-        </InputGroup.Append>
-      </InputGroup>
+              {/* <Examples /> */}
+            </div>
+          </Col>
 
+        </Row>
 
-
-    </div>
+      </Container>
+    </>
   );
 }
 
 
 const getStateToProps = (state) => (
   {
-    weather: state.weather.weather
+    request_token: state.auth.request_token
   }
 )
 
@@ -49,6 +64,8 @@ const getStateToProps = (state) => (
 
 
 
+// export default App;
+
 export default App = connect(getStateToProps, {
-  fetchWeather
+  getAuth
 })(App);

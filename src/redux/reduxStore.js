@@ -4,7 +4,7 @@ import reducer from './../redux/reducer';
 
 
 let redusers = combineReducers({
-    weather: reducer
+    auth: reducer
 });
 
 

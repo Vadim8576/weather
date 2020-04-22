@@ -1,25 +1,27 @@
 import * as axios from 'axios';
 
-// создаем настройки axios
+
+const token = 'api_key='+'b4ac21eb69cc3964a743fb16781abe2b';
+
+
 const instanse = axios.create({
-    withCredentials: true,
-    baseURL: 'https://api.gismeteo.net/v2/weather/current/?latitude=54.35&longitude=52.52',
-    headers: {
-        'X-Gismeteo-Token': '56b30cb255.3443075',
-        'Accept-Encoding': 'deflate'
-    }
+    baseURL: 'https://api.themoviedb.org/3/authentication/token/'
 });
 
 
 export const api = {
 
-    fetchWeather() {
+    getToken() {
         return instanse
-                .get()
-                .then(response => response.data)
-                .then(data => {
-                    console.log(data);
-                })
+                .get('new?'+token)
+                .then(response => response.data.request_token)
+    },
+
+    getAuth(request_body) {
+       
+        return instanse
+                .post('validate_with_login?'+token, request_body)
+                .then(response => response)
     }
 
     
