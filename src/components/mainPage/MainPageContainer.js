@@ -31,7 +31,7 @@ const MainPage = ({getToken}) => {
 
 const getStateToProps = (state) => (
     {
-        request_token: state.request_token.request_token
+        request_token: state.auth.request_token
     }
   )
   

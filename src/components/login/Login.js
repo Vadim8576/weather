@@ -3,23 +3,30 @@ import React from 'react';
 
 const Login = ({ request_token, getAuth, ...props }) => {
 
-    const authentication = (e) => {
+    const auth = (e) => {
+
+        // let request_body = {
+        //     "username": e.target.username.value,
+        //     "password": e.target.pass.value,
+        //     "request_token": request_token
+        // }
 
         let request_body = {
-            "username": e.target.username.value,
-            "password": e.target.pass.value,
+            "username": 'ZhVA',
+            "password": 'vadik250783',
             "request_token": request_token
         }
 
-        console.log(request_body, request_token);
+        // console.log(request_body, request_token);
 
-        getAuth(request_body);
+        props.authentication();
+        // getAuth(request_body);
     }
 
     return (
         <form onSubmit={(e) => {
             e.preventDefault();
-            authentication(e);
+            auth(e);
         }}>
             <label>
                 Redux-form

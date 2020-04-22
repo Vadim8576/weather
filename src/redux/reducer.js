@@ -5,7 +5,8 @@ const AUTH_IS_SUCCES = 'AUTH_IS_SUCCES';
 
 let initialState = {
     request_token: '',
-    isAuth: false
+    isAuth: false,
+    username: 'Гость'
 };
 
 
@@ -34,13 +35,46 @@ export const getTokenAC = (payload) => ( {type: GET_REQUEST_TOKEN, payload} );
 export const auth_is_success = () => ( {type: AUTH_IS_SUCCES} );
 
 
-export const getToken = () => (dispatch) => {
-        return api.getToken()
+
+
+
+
+export const authentication = () => async (dispatch) => {
+   
+    const request_token = getToken();
+    const session_id = createSession(request_token);
+
+
+    let request_body = {
+        "username": 'ZhVA',
+        "password": 'vadik250783',
+        "request_token": request_token
+    }
+    getAuth(request_body);
+}
+
+
+
+
+
+
+export const  getToken = () => async (dispatch) => {
+    alert();
+        return await api.getToken()
             .then(request_token => {
                 console.log(request_token);
                 dispatch(getTokenAC(request_token));
             })
 }
+
+export const createSession =  (request_token) => async (dispatch) => {
+    return await api.createSession()
+        .then(session_id => {
+            console.log(session_id);
+        })
+}
+
+
 
 
 export const getAuth = (request_body) => (dispatch) => {

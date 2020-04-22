@@ -7,13 +7,12 @@ import { connect } from 'react-redux';
 import HeaderContainer from './components/header/HeaderContainer';
 import MainPageContainer from './components/mainPage/MainPageContainer';
 import Login from './components/login/Login';
-import { getAuth } from './redux/reducer';
+import { getAuth, authentication } from './redux/reducer';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Profile from './components/mainPage/prifilePage/ProfilePageContainer';
 
 function App({ fetchWeather, ...props }) {
-
 
 
   return (
@@ -30,6 +29,7 @@ function App({ fetchWeather, ...props }) {
                   <Login
                     getAuth={props.getAuth}
                     request_token={props.request_token}
+                    authentication={props.authentication}
                   />}
                 />
                 <Route exact path='/main' render={() =>
@@ -67,5 +67,6 @@ const getStateToProps = (state) => (
 // export default App;
 
 export default App = connect(getStateToProps, {
-  getAuth
+  getAuth,
+  authentication
 })(App);
