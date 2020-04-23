@@ -10,13 +10,28 @@ const instanse = axios.create({
 });
 
 
+
+
 export const movie_api = {
 
-    getPopularMovies() {
-        const params = '&language=ru-RUS&page=1';
+    getPopularMovies(current_page) {
+        const params = '&language=ru-RU&page='+current_page;
         return instanse
-                .get('popular?' + api_key + params)
+                .get('top_rated?' + api_key + params)
+                .then(response => response.data)
+    },
+
+    getDetails(movie_id) {
+        const params = '&language=ru-RU';
+        return instanse
+                .get(movie_id + '?' + api_key + params)
                 .then(response => response.data)
     }
 }
 
+
+/*
+GET /movie/upcoming - список предстоящих фильмов в кинотеатрах
+
+
+*/

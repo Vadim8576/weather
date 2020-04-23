@@ -11,8 +11,9 @@ import { getAuth, authentication } from './redux/auth_reducer';
 // import { fetchingPopularMovie } from './redux/movie_reducer';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Profile from './components/prifilePage/ProfilePageContainer';
+import Profile from './components/profilePage/ProfilePageContainer';
 import Footer from './components/footer/Footer';
+import MovieDetailsContainer from './components/mainPage/MovieDetailsContainer';
 
 function App({ fetchWeather, ...props }) {
 
@@ -22,12 +23,16 @@ function App({ fetchWeather, ...props }) {
   return (
     <>
       <HeaderContainer />
+      <Switch>
+      <Route exact path='/movie_details/:movie_id?' render={() =>
+                  <MovieDetailsContainer />}
+                />
       <Container>
         <Row className="justify-content-md-center">
           <Col>
             <div className="App">
 
-              <Switch>
+              
                 <Route exact path='/' render={() => <Redirect to={'/main'} />} />
                 <Route exact path='/login' render={() =>
                   <Login
@@ -42,8 +47,11 @@ function App({ fetchWeather, ...props }) {
                 <Route exact path='/profile' render={() =>
                   <Profile />}
                 />
+                
+                
+
                 <Route path='/*' render={() => <Redirect to={'/main'} />} />
-              </Switch>
+              
 
 
               {/* <Examples /> */}
@@ -53,6 +61,7 @@ function App({ fetchWeather, ...props }) {
         </Row>
 
       </Container>
+      </Switch>
       <Footer />
     </>
   );

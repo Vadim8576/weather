@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 // import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import {fetchingPopularMovies} from './../../redux/movie_reducer';
+import {fetchingPopularMovies, setCurrentPage} from './../../redux/movie_reducer';
 import PopularMovies from './PopularMovies';
 
 
-const MainPage = ({fetchingPopularMovies, popular_movies, isFetching, ...props}) => {
-
-    // debugger;
-
+const MainPage = ({fetchingPopularMovies, ...props}) => {
+    
     useEffect(() => {
         fetchingPopularMovies();
       }, []);
@@ -16,7 +14,7 @@ const MainPage = ({fetchingPopularMovies, popular_movies, isFetching, ...props})
     return (
         <div className='mainPage'>
             
-           <PopularMovies popular_movies={popular_movies} isFetching={isFetching}/>
+           <PopularMovies {...props} />
 
         </div>
     )
@@ -26,14 +24,18 @@ const getStateToProps = (state) => (
     {
         // request_token: state.auth.request_token,
         popular_movies: state.movies.popular_movies,
-        isFetching: state.movies.isFetching
+        isFetching: state.movies.isFetching,
+        total_pages: state.movies.total_pages,
+        total_results: state.movies.total_results,
+        current_page: state.movies.current_page
     }
   )
   
 
 const MainPageContainer = connect(getStateToProps,
     {
-        fetchingPopularMovies
+        fetchingPopularMovies,
+        setCurrentPage
     })(MainPage);
 
   export default MainPageContainer;

@@ -17,6 +17,8 @@ const Navigation = ({isAuth}) => {
             <Nav className="mr-auto">
 
                 <NavItem link='/main' item='Главная' />
+                <NavItem link='/people' item='Люди' />
+
                 {isAuth &&
                     <NavItem link='/profile' item='Профиль' />
                 }

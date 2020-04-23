@@ -1,0 +1,84 @@
+.popular_movies h4 {
+   text-align: center;
+   margin-bottom: 30px;
+   text-transform: uppercase;
+}
+
+
+
+
+.card_container {
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+
+
+
+.card {
+    padding: 10px;
+    margin: 3px;
+    min-width: 170px;
+    min-height: 245px;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    
+    overflow: hidden;
+    position: relative;
+    
+}
+
+.content img {
+    /* margin: 10px; */
+    width: 150px;
+    height: 225px;
+    transition: 0.5s all ease;
+}
+
+
+.content:hover>.description {
+    opacity: 1;
+    bottom: 0;
+}
+
+.content:hover>img {
+    filter: blur(1px);
+    /* filter: grayscale(80%); */
+}
+
+.description {
+    padding: 15px 5px 15px 5px;
+    position: absolute;
+    width: 100%;
+    bottom: -100px;
+    left: 0;
+    /* background-color: rgba(0, 0, 0, 0.7);
+    color: #fff; */
+    background-color: rgba(255, 255, 255, 1);
+    color: #000;
+    transition: 0.7s all ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.card span {
+    /* line-height: 0.8em; */
+    display: block;
+    word-wrap: normal;
+    font-size: 0.8em;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
