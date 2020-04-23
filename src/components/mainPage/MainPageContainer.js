@@ -1,29 +1,22 @@
 import React, { useEffect } from 'react';
-import { Button, InputGroup, FormControl } from 'react-bootstrap';
+// import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import {getToken} from '../../redux/reducer';
+import {fetchingPopularMovies} from './../../redux/movie_reducer';
+import PopularMovies from './PopularMovies';
 
 
+const MainPage = ({fetchingPopularMovies, popular_movies, isFetching, ...props}) => {
 
-const MainPage = () => {
+    // debugger;
 
     useEffect(() => {
-        // getToken();
-      }, [])
+        fetchingPopularMovies();
+      }, []);
 
     return (
         <div className='mainPage'>
-            Main page
-            {/* <InputGroup className="mb-3">
-                <FormControl
-                    placeholder="Recipient's username"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
-                />
-                <InputGroup.Append>
-                    <Button variant="outline-secondary" onClick={() => getToken()}>Find</Button>
-                </InputGroup.Append>
-            </InputGroup> */}
+            
+           <PopularMovies popular_movies={popular_movies} isFetching={isFetching}/>
 
         </div>
     )
@@ -31,11 +24,16 @@ const MainPage = () => {
 
 const getStateToProps = (state) => (
     {
-        request_token: state.auth.request_token
+        // request_token: state.auth.request_token,
+        popular_movies: state.movies.popular_movies,
+        isFetching: state.movies.isFetching
     }
   )
   
 
-const MainPageContainer = connect(getStateToProps, null)(MainPage);
+const MainPageContainer = connect(getStateToProps,
+    {
+        fetchingPopularMovies
+    })(MainPage);
 
   export default MainPageContainer;

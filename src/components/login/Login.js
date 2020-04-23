@@ -5,21 +5,17 @@ const Login = ({ request_token, getAuth, ...props }) => {
 
     const auth = (e) => {
 
-        // let request_body = {
+        // let form_data = {
         //     "username": e.target.username.value,
         //     "password": e.target.pass.value,
         //     "request_token": request_token
         // }
 
-        let request_body = {
-            "username": 'ZhVA',
-            "password": 'vadik250783',
-            "request_token": request_token
-        }
+        let form_data={};
 
         // console.log(request_body, request_token);
 
-        props.authentication();
+        props.authentication(form_data);
         // getAuth(request_body);
     }
 

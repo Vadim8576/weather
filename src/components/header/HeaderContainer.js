@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 const Header = ({isAuth}) => {
     return (
 
-        <div className='header'>
+        <div className='header bg-dark'>
             <Container>
                 <Row>
                     <Col>

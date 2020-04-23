@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import reducer from './../redux/reducer';
+import auth_reducer from './auth_reducer';
+import movie_reducer from './movie_reducer';
 
 
 let redusers = combineReducers({
-    auth: reducer
+    auth: auth_reducer,
+    movies: movie_reducer
 });
 
 

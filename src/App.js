@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import './App.css';
+import './styles/global.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Examples from './examples-from-bootstrap';
@@ -7,12 +7,16 @@ import { connect } from 'react-redux';
 import HeaderContainer from './components/header/HeaderContainer';
 import MainPageContainer from './components/mainPage/MainPageContainer';
 import Login from './components/login/Login';
-import { getAuth, authentication } from './redux/reducer';
+import { getAuth, authentication } from './redux/auth_reducer';
+// import { fetchingPopularMovie } from './redux/movie_reducer';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Profile from './components/mainPage/prifilePage/ProfilePageContainer';
+import Profile from './components/prifilePage/ProfilePageContainer';
+import Footer from './components/footer/Footer';
 
 function App({ fetchWeather, ...props }) {
+
+
 
 
   return (
@@ -49,6 +53,7 @@ function App({ fetchWeather, ...props }) {
         </Row>
 
       </Container>
+      <Footer />
     </>
   );
 }
@@ -57,6 +62,7 @@ function App({ fetchWeather, ...props }) {
 const getStateToProps = (state) => (
   {
     request_token: state.auth.request_token
+    // popular_movie: state.movie.popular_movie
   }
 )
 
