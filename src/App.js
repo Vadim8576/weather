@@ -21,18 +21,18 @@ function App({ fetchWeather, ...props }) {
 
 
   return (
-    <>
-      <HeaderContainer />
-      <Switch>
-      <Route exact path='/movie_details/:movie_id?' render={() =>
+      <div className="App">
+        <HeaderContainer />
+
+        <Container>
+          <Row className="justify-content-md-center">
+            <Col>
+
+              <Switch>
+                <Route exact path='/movie_details/:movie_id?' render={() =>
                   <MovieDetailsContainer />}
                 />
-      <Container>
-        <Row className="justify-content-md-center">
-          <Col>
-            <div className="App">
 
-              
                 <Route exact path='/' render={() => <Redirect to={'/main'} />} />
                 <Route exact path='/login' render={() =>
                   <Login
@@ -47,23 +47,23 @@ function App({ fetchWeather, ...props }) {
                 <Route exact path='/profile' render={() =>
                   <Profile />}
                 />
-                
-                
+
+
 
                 <Route path='/*' render={() => <Redirect to={'/main'} />} />
-              
 
+              </Switch>
 
               {/* <Examples /> */}
-            </div>
-          </Col>
 
-        </Row>
+            </Col>
 
-      </Container>
-      </Switch>
-      <Footer />
-    </>
+          </Row>
+
+        </Container>
+
+        <Footer />
+      </div>
   );
 }
 
