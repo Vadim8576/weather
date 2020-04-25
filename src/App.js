@@ -14,6 +14,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Profile from './components/profilePage/ProfilePageContainer';
 import Footer from './components/footer/Footer';
 import MovieDetailsContainer from './components/mainPage/MovieDetailsContainer';
+import PeopleContainer from './components/mainPage/PeopleContainer';
 
 function App({ fetchWeather, ...props }) {
 
@@ -21,49 +22,53 @@ function App({ fetchWeather, ...props }) {
 
 
   return (
-      <div className="App">
-        <HeaderContainer />
+    <div className="App">
+      <HeaderContainer />
 
-        <Container>
-          <Row className="justify-content-md-center">
-            <Col>
+      <Container className="justify-content-md-center">
+        {/* <Row className="justify-content-md-center"> */}
+        {/* <Col> */}
 
-              <Switch>
-                <Route exact path='/movie_details/:movie_id?' render={() =>
-                  <MovieDetailsContainer />}
-                />
+        <Switch>
+          <Route exact path='/movie_details/:movie_id?' render={() =>
+            <MovieDetailsContainer />}
+          />
 
-                <Route exact path='/' render={() => <Redirect to={'/main'} />} />
-                <Route exact path='/login' render={() =>
-                  <Login
-                    getAuth={props.getAuth}
-                    request_token={props.request_token}
-                    authentication={props.authentication}
-                  />}
-                />
-                <Route exact path='/main' render={() =>
-                  <MainPageContainer />}
-                />
-                <Route exact path='/profile' render={() =>
-                  <Profile />}
-                />
+          <Route exact path='/people/:people_id?' render={() =>
+            <PeopleContainer />}
+          />
+
+          <Route exact path='/' render={() => <Redirect to={'/main'} />} />
+          <Route exact path='/login' render={() =>
+            <Login
+              getAuth={props.getAuth}
+              request_token={props.request_token}
+              authentication={props.authentication}
+            />}
+          />
+          <Route exact path='/main' render={() =>
+            <MainPageContainer />}
+          />
+          <Route exact path='/profile' render={() =>
+            <Profile />}
+          />
 
 
 
-                <Route path='/*' render={() => <Redirect to={'/main'} />} />
+          <Route path='/*' render={() => <Redirect to={'/main'} />} />
 
-              </Switch>
+        </Switch>
 
-              {/* <Examples /> */}
+        {/* <Examples /> */}
 
-            </Col>
+        {/* </Col> */}
 
-          </Row>
+        {/* </Row> */}
 
-        </Container>
+      </Container>
 
-        <Footer />
-      </div>
+      <Footer />
+    </div>
   );
 }
 

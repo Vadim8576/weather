@@ -26,6 +26,13 @@ export const movie_api = {
         return instanse
                 .get(movie_id + '?' + api_key + params)
                 .then(response => response.data)
+    },
+
+    // получить список актеров, съемочной комманды
+    getCredits(movie_id) {
+        return instanse
+                .get(movie_id + '/credits?' + api_key)
+                .then(response => response.data)
     }
 }
 

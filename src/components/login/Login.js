@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form, Button } from 'react-bootstrap';
 
 
 const Login = ({ request_token, getAuth, ...props }) => {
@@ -11,7 +12,7 @@ const Login = ({ request_token, getAuth, ...props }) => {
         //     "request_token": request_token
         // }
 
-        let form_data={};
+        let form_data = {};
 
         // console.log(request_body, request_token);
 
@@ -20,17 +21,42 @@ const Login = ({ request_token, getAuth, ...props }) => {
     }
 
     return (
-        <form onSubmit={(e) => {
-            e.preventDefault();
-            auth(e);
-        }}>
-            <label>
-                Redux-form
-                <input type='text' placeholder='user name' name='username' />
-                <input type='text' placeholder='password' name='pass' />
-                <button>Send</button>
-            </label>
-        </form>
+        // <form onSubmit={(e) => {
+        //     e.preventDefault();
+        //     auth(e);
+        // }}>
+        //     <label>
+        //         Redux-form
+        //         <input type='text' placeholder='user name' name='username' />
+        //         <input type='text' placeholder='password' name='pass' />
+        //         <button>Send</button>
+        //     </label>
+        // </form>
+
+
+        <Form onSubmit={(e) => {
+                e.preventDefault();
+                auth(e);
+            }}>
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Имя пользователя</Form.Label>
+                <Form.Control type="username" placeholder="Имя пользователя" />
+                <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>Пароль</Form.Label>
+                <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            {/* <Form.Group controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Check me out" />
+            </Form.Group> */}
+            <Button variant="primary" type="submit">
+                Войти
+            </Button>
+        </Form>
 
 
     )

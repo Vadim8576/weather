@@ -12,11 +12,11 @@ const MainPage = ({fetchingPopularMovies, ...props}) => {
       }, []);
 
     return (
-        <div className='mainPage'>
+        <>
             
            <PopularMovies {...props} />
 
-        </div>
+        </>
     )
 }
 
@@ -24,7 +24,7 @@ const getStateToProps = (state) => (
     {
         // request_token: state.auth.request_token,
         popular_movies: state.movies.popular_movies,
-        isFetching: state.movies.isFetching,
+        popular_movies_isFetching: state.movies.popular_movies_isFetching,
         total_pages: state.movies.total_pages,
         total_results: state.movies.total_results,
         current_page: state.movies.current_page
