@@ -1,8 +1,10 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getAuth, authentication } from './../../redux/auth_reducer';
 
 
-const Login = ({ request_token, getAuth, ...props }) => {
+let Login = ({ request_token, getAuth, authentication, ...props }) => {
 
     const auth = (e) => {
 
@@ -16,24 +18,12 @@ const Login = ({ request_token, getAuth, ...props }) => {
 
         // console.log(request_body, request_token);
 
-        props.authentication(form_data);
+        authentication(form_data);
         // getAuth(request_body);
     }
 
     return (
-        // <form onSubmit={(e) => {
-        //     e.preventDefault();
-        //     auth(e);
-        // }}>
-        //     <label>
-        //         Redux-form
-        //         <input type='text' placeholder='user name' name='username' />
-        //         <input type='text' placeholder='password' name='pass' />
-        //         <button>Send</button>
-        //     </label>
-        // </form>
-
-
+        
         <Form onSubmit={(e) => {
                 e.preventDefault();
                 auth(e);
@@ -58,9 +48,19 @@ const Login = ({ request_token, getAuth, ...props }) => {
             </Button>
         </Form>
 
-
     )
 }
 
 
-export default Login;
+
+const mapStateToProps = (state) => (
+    {
+        request_token: state.auth.request_token
+    }
+)
+
+
+export default Login = connect(mapStateToProps, {
+    getAuth,
+    authentication
+})(Login);

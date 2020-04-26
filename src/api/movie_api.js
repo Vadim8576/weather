@@ -33,6 +33,13 @@ export const movie_api = {
         return instanse
                 .get(movie_id + '/credits?' + api_key)
                 .then(response => response.data)
+    },
+
+    getReleases(movie_id) {
+        return instanse
+                .get(movie_id + '/release_dates?' + api_key)
+                .then(response => response.data)
+                
     }
 }
 

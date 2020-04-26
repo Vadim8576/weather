@@ -1,10 +1,13 @@
 import { movie_api } from '../api/movie_api';
+import { config_api } from '../api/config_api';
+
 
 const FETCHING_POPULAR_MOVIES = 'FETCHING_POPULAR_MOVIES';
 const MOVIE_DETAILS_IS_FETCHING = 'MOVIE_DETAILS_IS_FETCHING';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const FETCHING_MOVIE_DETAILES = 'FETCHING_MOVIE_DETAILES';
 const FETCHING_CREDITS = 'FETCHING_CREDITS';
+const FETCHING_RELEASES = 'FETCHING_RELEASES';
 
 
 
@@ -16,7 +19,9 @@ let initialState = {
     current_page: 1,
     movie_details: {},
     movie_details_isFetching: false,
-    credits: []
+    credits: [],
+    releases: [],
+    releases_isFetching: false
 };
 
 /*
@@ -27,7 +32,7 @@ state = {
 
 const movie_reducer = (state = initialState, action) => {
 
-    switch(action.type) {
+    switch (action.type) {
         case FETCHING_POPULAR_MOVIES:
             return {
                 ...state,
@@ -62,6 +67,13 @@ const movie_reducer = (state = initialState, action) => {
                 credits: action.payload
             };
 
+        case FETCHING_RELEASES:
+            return {
+                ...state,
+                releases: action.payload,
+                releases_isFetching: true
+            };
+
 
         case MOVIE_DETAILS_IS_FETCHING:
             return {
@@ -69,19 +81,20 @@ const movie_reducer = (state = initialState, action) => {
                 movie_details_isFetching: true
             };
         default:
-        return state;
+            return state;
     }
 }
 
 
 
 
-const fetchingPopularMoviesAC = (payload) => ( {type: FETCHING_POPULAR_MOVIES, payload} );
+const fetchingPopularMoviesAC = (payload) => ({ type: FETCHING_POPULAR_MOVIES, payload });
 // const moviesIsFetching = () => ( {type: MOVIES_IS_FETCHING} );
-const setCurrentPageAC = (payload) => ( {type: SET_CURRENT_PAGE, payload} );
-const fetchingMovieDetailes = (payload) => ( {type: FETCHING_MOVIE_DETAILES, payload} );
-const getCreditsAC = (payload) => ( {type: FETCHING_CREDITS, payload} );
-const movie_details_isFetching = () => ( {type: MOVIE_DETAILS_IS_FETCHING} );
+const setCurrentPageAC = (payload) => ({ type: SET_CURRENT_PAGE, payload });
+const fetchingMovieDetailes = (payload) => ({ type: FETCHING_MOVIE_DETAILES, payload });
+const setCreditsAC = (payload) => ({ type: FETCHING_CREDITS, payload });
+const setReleasesAC = (payload) => ({ type: FETCHING_RELEASES, payload });
+const movie_details_isFetching = () => ({ type: MOVIE_DETAILS_IS_FETCHING });
 
 
 
@@ -128,25 +141,65 @@ export const getDetails = (movie_id) => async (dispatch) => {
 
     await movie_api.getDetails(movie_id)
         .then(response => {
-            console.log('movie details', response);      
+            console.log('movie details', response);
             dispatch(fetchingMovieDetailes(response));
         })
 
-      await dispatch(getCredits(movie_id));
+    // await dispatch(getCredits(movie_id));
 
-        dispatch(movie_details_isFetching());
+    // dispatch(setCreditsAC(movie_id));
+
+    dispatch(movie_details_isFetching());
 }
+
+
 
 export const getCredits = (movie_id) => (dispatch) => {
 
     movie_api.getCredits(movie_id)
         .then(response => {
 
-            console.log('Credits', response);     
+            console.log('Credits', response);
 
-            dispatch(getCreditsAC(response));
+            dispatch(setCreditsAC(response));
 
         })
+}
+
+
+
+
+export const getReleases = (movie_id) => async (dispatch) => {
+
+    let releases = await movie_api.getReleases(movie_id);
+
+    console.log('Releases', releases.results);
+
+
+    let countries = await config_api.getCountries();
+
+
+    let payload = {};
+
+
+    countries.map(i => {
+        payload[i.iso_3166_1] = i.english_name;
+        return payload;
+    })
+
+    if (countries.length>0 && releases.results) {
+        releases.results.map(i => {
+            i.iso_3166_1 = payload[i.iso_3166_1]
+        })
+    }
+
+
+
+    console.log('releases', releases);
+
+    dispatch(setReleasesAC(releases.results));
+
+
 }
 
 

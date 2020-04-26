@@ -84,7 +84,7 @@ export const getFilmography = (people_id) => (dispatch) => {
 
 export const getImages = (people_id) => (dispatch) => {
 
-    people_api.getImages(people_id)
+    return people_api.getImages(people_id)
         .then(response => {
 
             console.log('getImages ', response);

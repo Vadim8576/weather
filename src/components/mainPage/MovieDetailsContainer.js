@@ -4,34 +4,20 @@ import { getDetails, getCredits } from '../../redux/movie_reducer';
 import { withRouter, NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import './../../styles/MovieDetails.css'
-import { Badge, Row, Col, Spinner } from 'react-bootstrap';
-
-
-
-const setDate = (d) => {
-    const options = {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      // hour: 'numeric',
-      // minute: 'numeric',
-      // second: 'numeric',
-      timezone: 'UTC'
-    };
-    return new Date(d).toLocaleString("ru", options);
-  }
+import { Badge, Spinner } from 'react-bootstrap';
+import mySetDate from '../../common/mySetDate';
 
 
 
 
 const MovieDetails = ({ getDetails, getCredits, movie_details, movie_details_isFetching, credits, ...props }) => {
 
-     const  release_date = movie_details.release_date ? setDate( movie_details.release_date) : 'нет данных';
+     const  release_date = movie_details.release_date ? mySetDate( movie_details.release_date) : 'нет данных';
 
     useEffect(() => {
         const movie_id = props.match.params.movie_id;
         getDetails(movie_id);
-        // getCredits(movie_id);
+        getCredits(movie_id);
     }, [props.match.params.movie_id])
 
     return (
@@ -54,7 +40,9 @@ const MovieDetails = ({ getDetails, getCredits, movie_details, movie_details_isF
                             <p>Оригинальное название: {movie_details.original_title ? movie_details.original_title : 'нет данных'}</p>
                             <p>Слоган: {movie_details.tagline ? movie_details.tagline : 'нет данных'}</p>
                             <p>Жанр: {movie_details.genres ? movie_details.genres.map(i => i.name + ', ') : 'нет данных'}</p>
-                            <p>Дата релиза: {release_date}</p>
+                            <p>Дата релиза: {release_date} &nbsp;
+                                <NavLink to={`/movie_releases/${movie_details.id}`} className='navbar-brand'>подробнее</NavLink>
+                            </p>
                             <p>Страна производства: {movie_details.production_countries ? movie_details.production_countries.map(i => i.name + ', ') : 'нет данных'}</p>
                             <p>Студия: {movie_details.production_companies ? movie_details.production_companies.map(i => i.name + ', ') : 'нет данных'}</p>
                             <p>Бюджет: {movie_details.budget ? movie_details.budget + '$' : 'нет данных'}</p>

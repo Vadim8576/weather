@@ -1,24 +1,33 @@
 import React, { useEffect } from 'react';
 import './styles/global.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
-import Examples from './examples-from-bootstrap';
-import { connect } from 'react-redux';
 import HeaderContainer from './components/header/HeaderContainer';
 import MainPageContainer from './components/mainPage/MainPageContainer';
-import Login from './components/login/Login';
+import Footer from './components/footer/Footer';
+import {withSuspense} from './Lazy/withSuspense';
+
+
 import { getAuth, authentication } from './redux/auth_reducer';
-// import { fetchingPopularMovie } from './redux/movie_reducer';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Profile from './components/profilePage/ProfilePageContainer';
-import Footer from './components/footer/Footer';
-import MovieDetailsContainer from './components/mainPage/MovieDetailsContainer';
-import PeopleContainer from './components/mainPage/PeopleContainer';
-
-function App({ fetchWeather, ...props }) {
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 
+
+// import Login from './components/login/Login';
+const Login = React.lazy(() => import('./components/login/Login'));
+// import Profile from './components/profilePage/ProfilePageContainer';
+const Profile = React.lazy(() => import('./components/profilePage/ProfilePageContainer'));
+// import MovieDetailsContainer from './components/mainPage/MovieDetailsContainer';
+const MovieDetailsContainer = React.lazy(() => import('./components/mainPage/MovieDetailsContainer'));
+// import PeopleContainer from './components/mainPage/PeopleContainer';
+const PeopleContainer = React.lazy(() => import('./components/mainPage/people/PeopleContainer'));
+const MovieReleasesContainer = React.lazy(() => import('./components/mainPage/MovieReleasesContainer'));
+
+
+
+
+let App = ({ fetchWeather, ...props }) => {
 
 
   return (
@@ -30,36 +39,25 @@ function App({ fetchWeather, ...props }) {
         {/* <Col> */}
 
         <Switch>
-          <Route exact path='/movie_details/:movie_id?' render={() =>
-            <MovieDetailsContainer />}
-          />
+          <Route exact path='/movie_details/:movie_id?' render={withSuspense(MovieDetailsContainer)} />
 
-          <Route exact path='/people/:people_id?' render={() =>
-            <PeopleContainer />}
-          />
+          <Route exact path='/movie_releases/:movie_id?' render={withSuspense(MovieReleasesContainer)} />
+
+          <Route exact path='/people/:people_id?' render={withSuspense(PeopleContainer)} />
 
           <Route exact path='/' render={() => <Redirect to={'/main'} />} />
-          <Route exact path='/login' render={() =>
-            <Login
-              getAuth={props.getAuth}
-              request_token={props.request_token}
-              authentication={props.authentication}
-            />}
-          />
+          <Route exact path='/login' render={withSuspense(Login)} />
           <Route exact path='/main' render={() =>
             <MainPageContainer />}
           />
           <Route exact path='/profile' render={() =>
-            <Profile />}
+            withSuspense(Profile)}
           />
-
-
 
           <Route path='/*' render={() => <Redirect to={'/main'} />} />
 
         </Switch>
 
-        {/* <Examples /> */}
 
         {/* </Col> */}
 
@@ -86,7 +84,7 @@ const getStateToProps = (state) => (
 
 // export default App;
 
-export default App = connect(getStateToProps, {
+export default App = compose(connect(getStateToProps, {
   getAuth,
   authentication
-})(App);
+}), withSuspense)(App);
