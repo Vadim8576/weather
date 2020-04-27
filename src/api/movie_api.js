@@ -22,7 +22,7 @@ export const movie_api = {
     },
 
     getDetails(movie_id) {
-        const params = '&language=ru-RU';
+        const params = '&language=ru-RU&append_to_response=videos,images';
         return instanse
                 .get(movie_id + '?' + api_key + params)
                 .then(response => response.data)
@@ -45,6 +45,11 @@ export const movie_api = {
 
 
 /*
+показываются в кинотеатрах Германии на этой неделе
+https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=de-DE&region=DE&release_date.gte=2016-11-16&release_date.lte=2016-12-02&with_release_type=2|3
+
+
+
 GET /movie/upcoming - список предстоящих фильмов в кинотеатрах
 
 

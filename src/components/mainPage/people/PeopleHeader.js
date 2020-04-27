@@ -26,6 +26,10 @@ const PeopleHeader = ({people, getImages, people_image, images_isFetching}) => {
                 setShow(true);
             }}>
                 <img src={people.profile_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${people.profile_path}` : '/img/no_photo.jpg'} alt='постер' />
+                <div className='loupe'>
+                    {/* лупа */}
+                    {/* &#128269; */}
+                </div>
             </div>
 
             <div className='text'>

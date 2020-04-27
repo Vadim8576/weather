@@ -4,8 +4,8 @@ import { getPeople, getImages } from '../../../redux/people_reducer';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Spinner } from 'react-bootstrap';
-import './../../../styles/MovieDetails.css';
-import Credits from './Credits';
+import './../../../styles/movieDetails.css';
+import PeopleCredits from './PeopleCredits';
 import PeopleHeader from './PeopleHeader';
 
 
@@ -42,7 +42,7 @@ const People = ({ getPeople, people_isFetching, people, filmography, filmography
                    />
                 }
                 
-                <Credits
+                <PeopleCredits
                     filmography={filmography}
                     filmography_isFetching={filmography_isFetching}
                 />

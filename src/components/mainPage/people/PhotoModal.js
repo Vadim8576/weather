@@ -3,7 +3,7 @@ import { Modal, Spinner } from 'react-bootstrap';
 
 
 
-const PhotoModal = ({people_image, show, setShow, name, images_isFetching}) => {
+const PhotoModal = ({ people_image, show, setShow, name, images_isFetching }) => {
 
     const [current_photo, setCurrentPhoto] = useState(0);
 
@@ -16,54 +16,51 @@ const PhotoModal = ({people_image, show, setShow, name, images_isFetching}) => {
 
     return (
         <Modal
-                people_image={people_image}
-                show={show}
-                onHide={() => setShow(false)}
-                dialogClassName="modal-90w"
-                aria-labelledby="people-custom-modal-styling-title"
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="people-custom-modal-styling-title">
-                        {name ? name : 'Фотографии'}
+            people_image={people_image}
+            show={show}
+            onHide={() => setShow(false)}
+            dialogClassName="modal-90w"
+            aria-labelledby="people-custom-modal-styling-title"
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="people-custom-modal-styling-title">
+                    {name ? name : 'Фотографии'}
                         &nbsp;
-                        {people_image.length>0 && <>({current_photo + 1 + ' из '}{people_image.length})</>}
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+                        {people_image.length > 0 && <>({current_photo + 1 + ' из '}{people_image.length})</>}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
 
-                    {images_isFetching ?
-                        <div className='people_photos_container'>
+                {images_isFetching ?
+                    <div className='people_photos_container'>
 
-                            {people_image.length > 0 &&
-                                <>
-                                    <div className='arrow' onClick={() => selectCurrentPhoto(-1)}>&#60;</div>
+                        {people_image.length > 0 &&
+                            <>
+                                <div className='arrow' onClick={() => selectCurrentPhoto(-1)}>&#60;</div>
 
-                                    {people_image.map((i, index) => {
-                                        if (index === current_photo) {
-                                            return (
-                                                <>
-                                                    <div key={index} className='people_photos'>
-                                                        <img src={`https://image.tmdb.org/t/p/w500${i.file_path}`} alt='Фото' />
-                                                    </div>
+                                {people_image.map((i, index) => {
+                                    if (index === current_photo) {
+                                        return (
+                                            <div key={index} className='people_photos'>
+                                                <img src={`https://image.tmdb.org/t/p/w500${i.file_path}`} alt='Фото' />
+                                            </div>
+                                        )
+                                    }
+                                })}
 
-                                                </>
-                                            )
-                                        }
-                                    })}
+                                <div className='arrow' onClick={() => selectCurrentPhoto(1)}>&#62;</div>
+                            </>
+                        }
+                        {people_image.length <= 0 &&
+                            <img src='/img/no_photo.jpg' alt='Фото' />
+                        }
+                    </div>
+                    // || <img src='/img/no_photo.jpg' alt='Фото' />
+                    : <Spinner animation='border' />
+                }
 
-                                    <div className='arrow' onClick={() => selectCurrentPhoto(1)}>&#62;</div>
-                                </>
-                            }
-                            {people_image.length<=0 &&
-                                <img src='/img/no_photo.jpg' alt='Фото' />
-                            }
-                        </div>
-                        // || <img src='/img/no_photo.jpg' alt='Фото' />
-                        : <Spinner animation='border' />
-                    }
-
-                </Modal.Body>
-            </Modal>
+            </Modal.Body>
+        </Modal>
     )
 }
 

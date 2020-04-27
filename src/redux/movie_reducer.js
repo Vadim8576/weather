@@ -142,14 +142,11 @@ export const getDetails = (movie_id) => async (dispatch) => {
     await movie_api.getDetails(movie_id)
         .then(response => {
             console.log('movie details', response);
+            console.log('video', response.videos.results);
             dispatch(fetchingMovieDetailes(response));
+            dispatch(movie_details_isFetching());
+
         })
-
-    // await dispatch(getCredits(movie_id));
-
-    // dispatch(setCreditsAC(movie_id));
-
-    dispatch(movie_details_isFetching());
 }
 
 

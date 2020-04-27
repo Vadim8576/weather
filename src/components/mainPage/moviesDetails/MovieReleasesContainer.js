@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getReleases, getDetails } from './../../redux/movie_reducer';
+import { getReleases, getDetails } from '../../../redux/movie_reducer';
 import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import { Spinner, Table } from 'react-bootstrap';
-import mySetDate from '../../common/mySetDate';
+import mySetDate from '../../../common/mySetDate';
+import './../../../styles/movieReleases.css'
 
 
 
@@ -19,9 +20,23 @@ let MovieReleasesContainer = ({ releases, releases_isFetching, getReleases, getD
 
     return (
         <div className='releases'>
-            <h3>{movie_details.title}</h3>
-            <hr/>
-            <h5>Даты выхода:</h5>
+            <div className='realeases_header border'>
+                <div className='realeases_poster'>
+                    <NavLink to={`/movie_details/${props.match.params.movie_id}`} className='link'>
+                        <img src={movie_details.poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${movie_details.poster_path}` : '/img/no_poster.jpg'} alt='постер' />
+                        Вернуться
+                    </NavLink>
+                </div>
+                <div className='realeases_text'>
+                    <h4>{movie_details.title}</h4>
+                </div>
+                <br />
+
+            </div>
+
+
+            <h5>Даты релизов:</h5>
+            <br />
             {releases
                 ? <MyTable releases={releases} />
                 : <Spinner animation='border' />}
@@ -36,7 +51,10 @@ const MyTable = ({ releases }) => {
     return <>
         {releases.map(i =>
             <div key={i.iso_3166_1}>
-                <b>{i.iso_3166_1}</b>
+                <div className="list-group-item active">
+                    {i.iso_3166_1}
+                </div>
+
                 <Table bordered>
                     <thead>
                         <tr>
@@ -48,14 +66,14 @@ const MyTable = ({ releases }) => {
                     </thead>
                     <tbody>
 
-                        {i.release_dates.map((i, index) => 
+                        {i.release_dates.map((i, index) =>
                             <tr key={index}>
                                 <td>{mySetDate(i.release_date)}</td>
                                 <td>{i.certification}</td>
                                 <td>{i.type}</td>
                                 <td>{i.note}</td>
                             </tr>
-                           
+
                         )
                         }
 

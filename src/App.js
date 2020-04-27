@@ -19,10 +19,10 @@ const Login = React.lazy(() => import('./components/login/Login'));
 // import Profile from './components/profilePage/ProfilePageContainer';
 const Profile = React.lazy(() => import('./components/profilePage/ProfilePageContainer'));
 // import MovieDetailsContainer from './components/mainPage/MovieDetailsContainer';
-const MovieDetailsContainer = React.lazy(() => import('./components/mainPage/MovieDetailsContainer'));
+const MovieDetailsContainer = React.lazy(() => import('./components/mainPage/moviesDetails/MovieDetailsContainer'));
 // import PeopleContainer from './components/mainPage/PeopleContainer';
 const PeopleContainer = React.lazy(() => import('./components/mainPage/people/PeopleContainer'));
-const MovieReleasesContainer = React.lazy(() => import('./components/mainPage/MovieReleasesContainer'));
+const MovieReleasesContainer = React.lazy(() => import('./components/mainPage/moviesDetails/MovieReleasesContainer'));
 
 
 
