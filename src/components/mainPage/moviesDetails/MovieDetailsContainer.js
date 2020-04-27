@@ -4,14 +4,14 @@ import { getDetails, getCredits } from '../../../redux/movie_reducer';
 import { withRouter, NavLink } from 'react-router-dom';
 import { compose } from 'redux';
 import './../../../styles/movieDetails.css'
-import { Spinner, ListGroup } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import MovieDetailsHeader from './MovieDetailsHeader';
-import MovieDetailsCredits from './MovieDetailsCredits';
+import Credits from '../Credits';
 
 
 
 
-const MovieDetails = ({ getDetails, getCredits, movie_details, movie_details_isFetching, credits, ...props }) => {
+const MovieDetails = ({ getDetails, getCredits, movie_details, movie_details_isFetching, credits, credits_isFetching, ...props }) => {
 
 
     useEffect(() => {
@@ -21,21 +21,26 @@ const MovieDetails = ({ getDetails, getCredits, movie_details, movie_details_isF
     }, [props.match.params.movie_id])
 
     return (
-        <>
-            {!movie_details_isFetching && <Spinner animation='border' />}
-            {movie_details_isFetching &&
-                <div className='movie_details_container'>
 
-                    <MovieDetailsHeader
-                        movie_details={movie_details}
-                    />
-
-
-                    <MovieDetailsCredits credits={credits} />
-                </div>
+        <div className='movie_details_container'>
+            {movie_details_isFetching
+                ? <MovieDetailsHeader
+                    movie_details={movie_details}
+                    movie_details_isFetching={movie_details_isFetching}
+                />
+                : <Spinner animation='border' />
             }
 
-        </>
+            {credits_isFetching
+                ? <>
+                    <Credits id={props.match.params.movie_id} data={credits.cast} type={['movie', 'cast']} />
+                    <Credits id={props.match.params.movie_id} data={credits.crew} type={['movie', 'crew']} />
+                </>
+                : <Spinner animation='border' />
+            }
+
+        </div>
+
     )
 }
 
@@ -44,7 +49,8 @@ const getStateToProps = (state) => (
     {
         movie_details: state.movies.movie_details,
         credits: state.movies.credits,
-        movie_details_isFetching: state.movies.movie_details_isFetching
+        movie_details_isFetching: state.movies.movie_details_isFetching,
+        credits_isFetching: state.movies.credits_isFetching
     }
 )
 

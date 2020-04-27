@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Spinner } from 'react-bootstrap';
 import './../../../styles/movieDetails.css';
-import PeopleCredits from './PeopleCredits';
 import PeopleHeader from './PeopleHeader';
+import Credits from '../Credits';
 
 
 
@@ -42,10 +42,14 @@ const People = ({ getPeople, people_isFetching, people, filmography, filmography
                    />
                 }
                 
-                <PeopleCredits
+                <Credits id={props.match.params.people_id} data={filmography.cast} type={['people', 'cast']} />
+                <Credits id={props.match.params.people_id} data={filmography.crew} type={['people', 'crew']} />
+            
+
+                {/* <PeopleCredits
                     filmography={filmography}
                     filmography_isFetching={filmography_isFetching}
-                />
+                /> */}
             </div>
 
         </>

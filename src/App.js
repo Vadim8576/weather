@@ -23,6 +23,10 @@ const MovieDetailsContainer = React.lazy(() => import('./components/mainPage/mov
 // import PeopleContainer from './components/mainPage/PeopleContainer';
 const PeopleContainer = React.lazy(() => import('./components/mainPage/people/PeopleContainer'));
 const MovieReleasesContainer = React.lazy(() => import('./components/mainPage/moviesDetails/MovieReleasesContainer'));
+const MovieCasts = React.lazy(() => import('./components/mainPage/moviesDetails/MovieCasts'));
+const MovieCrew = React.lazy(() => import('./components/mainPage/moviesDetails/MovieCrew'));
+const PeopleFilmography = React.lazy(() => import('./components/mainPage/people/PeopleFilmography'));
+const PeopleCrew = React.lazy(() => import('./components/mainPage/people/PeopleCrew'));
 
 
 
@@ -42,6 +46,11 @@ let App = ({ fetchWeather, ...props }) => {
           <Route exact path='/movie_details/:movie_id?' render={withSuspense(MovieDetailsContainer)} />
 
           <Route exact path='/movie_releases/:movie_id?' render={withSuspense(MovieReleasesContainer)} />
+
+          <Route exact path='/casts/:movie_id?' render={withSuspense(MovieCasts)} />
+          <Route exact path='/crew/:movie_id?' render={withSuspense(MovieCrew)} />
+          <Route exact path='/people_filmography/:people_id?' render={withSuspense(PeopleFilmography)} />
+          <Route exact path='/people_crew/:people_id?' render={withSuspense(PeopleCrew)} />
 
           <Route exact path='/people/:people_id?' render={withSuspense(PeopleContainer)} />
 

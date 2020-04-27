@@ -12,6 +12,6 @@
 }
 
 .border {
-    border: 1px rgb(207, 207, 207) solid;
+    border: 1px rgba(0,0,0,.125) solid;
 }
 

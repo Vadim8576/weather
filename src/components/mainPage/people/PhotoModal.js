@@ -37,17 +37,17 @@ const PhotoModal = ({ people_image, show, setShow, name, images_isFetching }) =>
                         {people_image.length > 0 &&
                             <>
                                 <div className='arrow' onClick={() => selectCurrentPhoto(-1)}>&#60;</div>
+                                <div className='people_photos'>
+                                    {people_image.map((i, index) => {
+                                        if (index === current_photo) {
+                                            return (
+                                                
+                                                <img key={index} src={`https://image.tmdb.org/t/p/w500${i.file_path}`} alt='Фото' />
 
-                                {people_image.map((i, index) => {
-                                    if (index === current_photo) {
-                                        return (
-                                            <div key={index} className='people_photos'>
-                                                <img src={`https://image.tmdb.org/t/p/w500${i.file_path}`} alt='Фото' />
-                                            </div>
-                                        )
-                                    }
-                                })}
-
+                                            )
+                                        }
+                                    })}
+                                </div>
                                 <div className='arrow' onClick={() => selectCurrentPhoto(1)}>&#62;</div>
                             </>
                         }

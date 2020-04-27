@@ -86,56 +86,59 @@
 }
 
 .credits{
-    /* padding: 15px; */
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
+
     width: 100%;
 }
 
-/* .credits ul {
-    padding-left: 0;
-}
 
-.credits li {
-    list-style-type: none;
-    margin-bottom: 5px;
-    padding: 5px;
-    height: 95px;
-} */
-
-.credits li img {
-    width: auto;
-    height: 75px;
-    /* height: auto; */
-
+.credits_tittle {
+    width: 100%;
+    padding: 10px 20px;
     border-radius: 5px;
 }
 
+
+
 .credits_list {
-    display: flex;
-    justify-content: flex-start;
+    /* width: 140px; */
+    display: inline-block;
+    /* justify-content: flex-start; */
     /* align-items: center; */
-    height: 100%;
+    /* height: 100%; */
+    /* border: 1px rgba(0,0,0,.125) solid; */
+    border-radius: 10px;
+    padding: 5px;
+    margin-right: 10px;
+    overflow: hidden;
+    box-shadow: 2px 2px 2px rgba(0,0,0,.125);
+}
+
+
+.credits_list img {
+    width: auto;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.credits_list div {
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 2px;
 }
 
 .credits_list i {
     color: rgb(156, 156, 156);
 }
 
-.cast {
-    width: 50%;
-    margin-right: 3px;
+.cast, .crew {
+    width: 100%;
+    padding: 15px;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-bottom: 30px;
+    /* vertical-align: middle; */
 }
-.crew {
-    width: 50%;
-}
-
-.photo {
-    padding-right: 10px;
-    /* border-right: 1px solid rgba(0,0,0,.125); */
-}
-
 
 
 
@@ -171,14 +174,14 @@
 }
 
 .people_photos {
-    /* width: 500px; */
+    width: 330px;
     height: 100%;
     margin: 0 20px 0;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 .people_photos img {
-    /* width: 500px; */
+    width: 330px;
     height: 100%;
 }
 

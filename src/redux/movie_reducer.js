@@ -20,6 +20,7 @@ let initialState = {
     movie_details: {},
     movie_details_isFetching: false,
     credits: [],
+    credits_isFetching: false,
     releases: [],
     releases_isFetching: false
 };
@@ -64,7 +65,8 @@ const movie_reducer = (state = initialState, action) => {
         case FETCHING_CREDITS:
             return {
                 ...state,
-                credits: action.payload
+                credits: action.payload,
+                credits_isFetching: true
             };
 
         case FETCHING_RELEASES:

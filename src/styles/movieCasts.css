@@ -1,0 +1,15 @@
+.movie_casts_list {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.movie_casts_list .photo {
+    width: 105px;
+    margin-right: 20px;
+}
+
+.movie_casts_list .photo img {
+    width: 100px;
+}

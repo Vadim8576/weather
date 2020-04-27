@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Spinner, Table } from 'react-bootstrap';
 import mySetDate from '../../../common/mySetDate';
-import './../../../styles/movieReleases.css'
+import './../../../styles/movieReleases.css';
 
 
 
@@ -19,7 +19,7 @@ let MovieReleasesContainer = ({ releases, releases_isFetching, getReleases, getD
     }, [])
 
     return (
-        <div className='releases'>
+        <div className='releases_container'>
             <div className='realeases_header border'>
                 <div className='realeases_poster'>
                     <NavLink to={`/movie_details/${props.match.params.movie_id}`} className='link'>
