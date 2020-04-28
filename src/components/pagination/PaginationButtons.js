@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Pagination } from 'react-bootstrap';
 import './../../styles/pagination.css';
 
-const PaginationButtons = ({total_pages, current_page, setCurrentPage}) => {
+// const PaginationButtons = ({total_pages, current_page, setCurrentPage}) => {
+const PaginationButtons = ({total_pages, setCurrentPage}) => {
+
+
+    const [current_page, setCurrPage] = useState(1);
 
 
     const selectCurrentPage = (current_page, total_pages) => {
 
         if (current_page <= total_pages && current_page >= 1) {
-            setCurrentPage(current_page); 
+            setCurrPage(current_page);
+            setCurrentPage(current_page);
+
         }
 
     }

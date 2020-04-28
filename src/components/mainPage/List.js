@@ -49,7 +49,7 @@ const List = ({ data, type, id }) => {
 
     if (type.context === 'people cast') {
         config = {
-            title: 'Фильмография',
+            title: 'Фильмы',
             text: {
                 name: 'title',
                 job: 'character'
@@ -99,7 +99,7 @@ const List = ({ data, type, id }) => {
                     if (index < count) {
                         return (
                             // <MapToCredits key={item.credit_id} item={item} config={config} />
-                            <div key={item.credit_id} className={config.type + '_list' + ' border'}>
+                            <div key={index} className={config.type + '_list' + ' border'}>
                                 <div className={config.type + '_photo'}>
                                     <NavLink to={config.target + item.id} className='link'>
                                         <img className='border' src=
@@ -110,10 +110,10 @@ const List = ({ data, type, id }) => {
                                 <div className='list_text'>
                                     <div>
                                         <NavLink to={config.target + item.id} className='link'>
-                                            {item[config.text.name].substring(0, 17)}
+                                            {item[config.text.name] && item[config.text.name]}
                                         </NavLink>
                                     </div>
-                                    <div><i>{item[config.text.job].substring(0, 17)}</i></div>
+                                    <div><i>{item[config.text.job] && item[config.text.job]}</i></div>
                                     {type.context === 'people cast' || type.context === 'people crew'
                                         ? <div><i>{mySetDate(item.release_date)}</i></div>
                                         : ''

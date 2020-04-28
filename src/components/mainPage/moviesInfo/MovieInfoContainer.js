@@ -10,7 +10,7 @@ import List from './../List';
 
 
 
-const MovieDetails = ({ getDetails, getCredits, movie_info, movie_info_isFetching, credits, credits_isFetching, ...props }) => {
+const MovieInfo = ({ getDetails, getCredits, movie_info, movie_info_isFetching, credits, credits_isFetching, ...props }) => {
     // a = {context: 'movie cast', view: 'horizontal'}
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const MovieDetails = ({ getDetails, getCredits, movie_info, movie_info_isFetchin
 }
 
 
-const getStateToProps = (state) => (
+const mapStateToProps = (state) => (
     {
         movie_info: state.movies.movie_info,
         credits: state.movies.credits,
@@ -55,7 +55,7 @@ const getStateToProps = (state) => (
 )
 
 
-const MovieDetailsContainer = compose(connect(getStateToProps,
-    { getDetails, getCredits }), withRouter)(MovieDetails);
+const MovieInfoContainer = compose(connect(mapStateToProps,
+    { getDetails, getCredits }), withRouter)(MovieInfo);
 
-export default MovieDetailsContainer;
+export default MovieInfoContainer;

@@ -26,14 +26,14 @@
 }
 
 .people_photos {
-    width: 330px;
+    /* width: 330px; */
     height: 100%;
     margin: 0 20px 0;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 .people_photos img {
-    width: 330px;
+    /* width: 330px; */
     height: 100%;
 }
 

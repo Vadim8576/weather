@@ -13,13 +13,9 @@ const PopularMovies = ({ popular_movies, popular_movies_isFetching, ...props }) 
 
             <h4>Самые популярные фильмы на <a href='https://www.themoviedb.org' target='_blank'> TMDb</a>:</h4>
 
-
             {popular_movies_isFetching && <PaginationButtons {...props} />}
 
             <hr />
-
-
-            {/* <NavLink to='/main' className='navbar-brand'><img className='logo' src={logoPath} alt='logo' /></NavLink> */}
 
             <div className='card_container'>
                 {popular_movies_isFetching

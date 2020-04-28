@@ -23,6 +23,7 @@ const MovieCasts = React.lazy(() => import('./components/mainPage/moviesInfo/Mov
 const MovieCrew = React.lazy(() => import('./components/mainPage/moviesInfo/MovieCrew'));
 const PeopleFilmography = React.lazy(() => import('./components/mainPage/peopleInfo/PeopleFilmography'));
 const PeopleCrew = React.lazy(() => import('./components/mainPage/peopleInfo/PeopleCrew'));
+const SearchContainer = React.lazy(() => import('./components/mainPage/SearchContainer'));
 
 
 
@@ -50,6 +51,8 @@ let App = ({ fetchWeather, ...props }) => {
 
           <Route exact path='/people/:people_id?' render={withSuspense(PeopleInfoContainer)} />
 
+          <Route exact path='/main/search/:s_query=:s_query?' render={withSuspense(SearchContainer)} />
+
           <Route exact path='/' render={() => <Redirect to={'/main'} />} />
           <Route exact path='/login' render={withSuspense(Login)} />
           <Route exact path='/main' render={() =>
@@ -59,7 +62,7 @@ let App = ({ fetchWeather, ...props }) => {
             withSuspense(Profile)}
           />
 
-          <Route path='/*' render={() => <Redirect to={'/main'} />} />
+          {/* <Route path='/*' render={() => <Redirect to={'/main'} />} /> */}
 
         </Switch>
 

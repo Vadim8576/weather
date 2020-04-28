@@ -134,7 +134,7 @@ export const setCurrentPage = (current_page) => (dispatch) => {
             }
             dispatch(fetchingPopularMoviesAC(payload));
             // dispatch(moviesIsFetching());
-            dispatch(setCurrentPageAC(current_page));
+            // dispatch(setCurrentPageAC(current_page));
         })
 }
 

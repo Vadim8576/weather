@@ -1,19 +1,18 @@
 import React from 'react';
 import '../../styles/header.css'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Navigation from '../nav/Nav';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
-const Header = ({isAuth}) => {
+const Header = ({ isAuth }) => {
     return (
 
         <div className='main_header bg-dark'>
             <Container>
-                <Row>
-                    <Col>
-                        <Navigation isAuth={isAuth} />
-                    </Col>
-                </Row>
+
+                <Navigation isAuth={isAuth} />
 
             </Container>
         </div>
@@ -27,6 +26,8 @@ const mapStateToProps = (state) => (
     }
 )
 
-const HeaderContainer = connect(mapStateToProps, null)(Header);
+const HeaderContainer = compose(connect(mapStateToProps, {
+    
+}), withRouter)(Header);
 
 export default HeaderContainer;

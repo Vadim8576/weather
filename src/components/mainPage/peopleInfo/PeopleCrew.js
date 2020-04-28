@@ -26,7 +26,7 @@ let MovieCasts = ({ getPeople, people, people_isFetching, filmography, filmograp
                     </NavLink>
                 </div>
                 <div className='realeases_text'>
-                    <h4>{filmography.title}</h4>
+                    <h4>{people.name}</h4>
                 </div>
                 <br />
             </div>

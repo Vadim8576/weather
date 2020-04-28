@@ -4,9 +4,9 @@ import PhotoModal from './PhotoModal';
 import './../../../styles/info_pages.css';
 
 
-const PeopleHeader = ({people, getImages, people_image, images_isFetching}) => {
-    
-    
+const PeopleHeader = ({ people, getImages, people_image, images_isFetching }) => {
+
+
     const [show, setShow] = useState(false);
 
     const birthday = people.birthday ? mySetDate(people.birthday) : 'нет данных';
@@ -41,7 +41,14 @@ const PeopleHeader = ({people, getImages, people_image, images_isFetching}) => {
                 <p>Так же известен(на), как: {people.also_known_as.map(i => i + ', ') || 'нет данных'}</p>
 
                 <p>Домашняя страница: {people.homepage ? people.homepage : 'нет данных'}</p>
-                <p>Биография: {people.biography ? people.biography : 'нет данных'}</p>
+                {people.biography
+                    ? <>
+                        <details>
+                            <summary>Биография:</summary>
+                            <p>{people.biography}</p>
+                        </details>
+                    </>
+                    : 'нет данных о биографии'}
 
             </div>
         </div>

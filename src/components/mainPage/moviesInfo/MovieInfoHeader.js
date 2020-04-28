@@ -29,10 +29,6 @@ const MovieDetailsHeader = ({ movie_info }) => {
                     }
 
                 </div>
-                <details>
-                    <summary>детали</summary>
-                    <p>подробнее о деталях</p>
-                </details>
             </div>
 
             <div className='text'>
@@ -63,7 +59,14 @@ const MovieDetailsHeader = ({ movie_info }) => {
                 <p>Продолжительность: {movie_info.runtime ? movie_info.runtime + ' мин' : 'нет данных'}</p>
                 <p>Статус: {movie_info.status ? movie_info.status : 'нет данных'}</p>
                 <p>Домашняя страница: {movie_info.homepage ? movie_info.homepage : 'нет данных'}</p>
-                <p>Краткое описание: {movie_info.overview ? movie_info.overview : 'нет данных'}</p>
+                {movie_info.overview
+                    ? <>
+                        <details>
+                        <summary>Краткое описание:</summary>
+                        <p>{movie_info.overview}</p>
+                        </details>
+                    </>
+                    : 'Описание отсутствует'}
             </div>
         </div>
 
