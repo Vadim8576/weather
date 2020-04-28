@@ -4,9 +4,8 @@ import { getPeople, getImages } from '../../../redux/people_reducer';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Spinner } from 'react-bootstrap';
-import './../../../styles/movieDetails.css';
-import PeopleHeader from './PeopleHeader';
-import Credits from '../Credits';
+import PeopleHeader from './PeopleInfoHeader';
+import List from './../List';
 
 
 
@@ -32,7 +31,7 @@ const People = ({ getPeople, people_isFetching, people, filmography, filmography
         <>
             {!people_isFetching && <Spinner animation='border' />}      
 
-            <div className='movie_details_container'>
+            
                 {people_isFetching &&
                    <PeopleHeader
                    people={people}
@@ -42,15 +41,11 @@ const People = ({ getPeople, people_isFetching, people, filmography, filmography
                    />
                 }
                 
-                <Credits id={props.match.params.people_id} data={filmography.cast} type={['people', 'cast']} />
-                <Credits id={props.match.params.people_id} data={filmography.crew} type={['people', 'crew']} />
-            
 
-                {/* <PeopleCredits
-                    filmography={filmography}
-                    filmography_isFetching={filmography_isFetching}
-                /> */}
-            </div>
+
+                <List id={props.match.params.people_id} data={filmography.cast} type={{context: 'people cast', view: 'horizontal'}} />
+                <List id={props.match.params.people_id} data={filmography.crew} type={{context: 'people crew', view: 'horizontal'}} />
+            
 
         </>
     )

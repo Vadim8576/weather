@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getDetails, getCredits } from '../../../redux/movie_reducer';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import './../../../styles/movieDetails.css'
 import { Spinner } from 'react-bootstrap';
-import MovieDetailsHeader from './MovieDetailsHeader';
-import Credits from '../Credits';
+import MovieInfoHeader from './MovieInfoHeader';
+import List from './../List';
 
 
 
 
-const MovieDetails = ({ getDetails, getCredits, movie_details, movie_details_isFetching, credits, credits_isFetching, ...props }) => {
-
+const MovieDetails = ({ getDetails, getCredits, movie_info, movie_info_isFetching, credits, credits_isFetching, ...props }) => {
+    // a = {context: 'movie cast', view: 'horizontal'}
 
     useEffect(() => {
         const movie_id = props.match.params.movie_id;
@@ -22,24 +21,25 @@ const MovieDetails = ({ getDetails, getCredits, movie_details, movie_details_isF
 
     return (
 
-        <div className='movie_details_container'>
-            {movie_details_isFetching
-                ? <MovieDetailsHeader
-                    movie_details={movie_details}
-                    movie_details_isFetching={movie_details_isFetching}
+        <>
+            {movie_info_isFetching
+                ? <MovieInfoHeader
+                    movie_info={movie_info}
+                    movie_info_isFetching={movie_info_isFetching}
                 />
                 : <Spinner animation='border' />
             }
 
+
             {credits_isFetching
                 ? <>
-                    <Credits id={props.match.params.movie_id} data={credits.cast} type={['movie', 'cast']} />
-                    <Credits id={props.match.params.movie_id} data={credits.crew} type={['movie', 'crew']} />
+                    <List id={props.match.params.movie_id} data={credits.cast} type={{context: 'movie cast', view: 'horizontal'}} />
+                    <List id={props.match.params.movie_id} data={credits.crew} type={{context: 'movie crew', view: 'horizontal'}} />
                 </>
                 : <Spinner animation='border' />
             }
 
-        </div>
+        </>
 
     )
 }
@@ -47,9 +47,9 @@ const MovieDetails = ({ getDetails, getCredits, movie_details, movie_details_isF
 
 const getStateToProps = (state) => (
     {
-        movie_details: state.movies.movie_details,
+        movie_info: state.movies.movie_info,
         credits: state.movies.credits,
-        movie_details_isFetching: state.movies.movie_details_isFetching,
+        movie_info_isFetching: state.movies.movie_info_isFetching,
         credits_isFetching: state.movies.credits_isFetching
     }
 )

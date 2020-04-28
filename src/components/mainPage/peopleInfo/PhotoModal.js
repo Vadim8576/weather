@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Spinner } from 'react-bootstrap';
+import './../../../styles/photos_modal.css'
 
 
 

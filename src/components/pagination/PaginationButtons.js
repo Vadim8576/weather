@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pagination } from 'react-bootstrap';
+import './../../styles/pagination.css';
 
 const PaginationButtons = ({total_pages, current_page, setCurrentPage}) => {
 

@@ -5,12 +5,12 @@ import { compose } from 'redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Spinner, Table } from 'react-bootstrap';
 import mySetDate from '../../../common/mySetDate';
-import './../../../styles/movieReleases.css';
+import './../../../styles/page_with_full_list.css';
 
 
 
 
-let MovieReleasesContainer = ({ releases, releases_isFetching, getReleases, getDetails, movie_details, ...props }) => {
+let MovieReleasesContainer = ({ releases, releases_isFetching, getReleases, getDetails, movie_info, ...props }) => {
 
     useEffect(() => {
         const movie_id = props.match.params.movie_id;
@@ -19,16 +19,16 @@ let MovieReleasesContainer = ({ releases, releases_isFetching, getReleases, getD
     }, [])
 
     return (
-        <div className='releases_container'>
+        <>
             <div className='realeases_header border'>
                 <div className='realeases_poster'>
-                    <NavLink to={`/movie_details/${props.match.params.movie_id}`} className='link'>
-                        <img src={movie_details.poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${movie_details.poster_path}` : '/img/no_poster.jpg'} alt='постер' />
+                    <NavLink to={`/movie_info/${props.match.params.movie_id}`} className='link'>
+                        <img src={movie_info.poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${movie_info.poster_path}` : '/img/no_poster.jpg'} alt='постер' />
                         Вернуться
                     </NavLink>
                 </div>
                 <div className='realeases_text'>
-                    <h4>{movie_details.title}</h4>
+                    <h4>{movie_info.title}</h4>
                 </div>
                 <br />
 
@@ -40,7 +40,7 @@ let MovieReleasesContainer = ({ releases, releases_isFetching, getReleases, getD
             {releases
                 ? <MyTable releases={releases} />
                 : <Spinner animation='border' />}
-        </div>
+        </>
     )
 }
 
@@ -92,7 +92,7 @@ const MyTable = ({ releases }) => {
 const mapStateToProps = (state) => ({
     releases: state.movies.releases,
     releases_isFetching: state.movies.releases_isFetching,
-    movie_details: state.movies.movie_details
+    movie_info: state.movies.movie_info
 })
 
 

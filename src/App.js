@@ -14,19 +14,15 @@ import { compose } from 'redux';
 
 
 
-// import Login from './components/login/Login';
 const Login = React.lazy(() => import('./components/login/Login'));
-// import Profile from './components/profilePage/ProfilePageContainer';
 const Profile = React.lazy(() => import('./components/profilePage/ProfilePageContainer'));
-// import MovieDetailsContainer from './components/mainPage/MovieDetailsContainer';
-const MovieDetailsContainer = React.lazy(() => import('./components/mainPage/moviesDetails/MovieDetailsContainer'));
-// import PeopleContainer from './components/mainPage/PeopleContainer';
-const PeopleContainer = React.lazy(() => import('./components/mainPage/people/PeopleContainer'));
-const MovieReleasesContainer = React.lazy(() => import('./components/mainPage/moviesDetails/MovieReleasesContainer'));
-const MovieCasts = React.lazy(() => import('./components/mainPage/moviesDetails/MovieCasts'));
-const MovieCrew = React.lazy(() => import('./components/mainPage/moviesDetails/MovieCrew'));
-const PeopleFilmography = React.lazy(() => import('./components/mainPage/people/PeopleFilmography'));
-const PeopleCrew = React.lazy(() => import('./components/mainPage/people/PeopleCrew'));
+const MovieInfoContainer = React.lazy(() => import('./components/mainPage/moviesInfo/MovieInfoContainer'));
+const PeopleInfoContainer = React.lazy(() => import('./components/mainPage/peopleInfo/PeopleInfoContainer'));
+const MovieReleasesContainer = React.lazy(() => import('./components/mainPage/moviesInfo/MovieReleasesContainer'));
+const MovieCasts = React.lazy(() => import('./components/mainPage/moviesInfo/MovieCasts'));
+const MovieCrew = React.lazy(() => import('./components/mainPage/moviesInfo/MovieCrew'));
+const PeopleFilmography = React.lazy(() => import('./components/mainPage/peopleInfo/PeopleFilmography'));
+const PeopleCrew = React.lazy(() => import('./components/mainPage/peopleInfo/PeopleCrew'));
 
 
 
@@ -43,7 +39,7 @@ let App = ({ fetchWeather, ...props }) => {
         {/* <Col> */}
 
         <Switch>
-          <Route exact path='/movie_details/:movie_id?' render={withSuspense(MovieDetailsContainer)} />
+          <Route exact path='/movie_info/:movie_id?' render={withSuspense(MovieInfoContainer)} />
 
           <Route exact path='/movie_releases/:movie_id?' render={withSuspense(MovieReleasesContainer)} />
 
@@ -52,7 +48,7 @@ let App = ({ fetchWeather, ...props }) => {
           <Route exact path='/people_filmography/:people_id?' render={withSuspense(PeopleFilmography)} />
           <Route exact path='/people_crew/:people_id?' render={withSuspense(PeopleCrew)} />
 
-          <Route exact path='/people/:people_id?' render={withSuspense(PeopleContainer)} />
+          <Route exact path='/people/:people_id?' render={withSuspense(PeopleInfoContainer)} />
 
           <Route exact path='/' render={() => <Redirect to={'/main'} />} />
           <Route exact path='/login' render={withSuspense(Login)} />

@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { getPeople } from '../../../redux/people_reducer';
-import './../../../styles/movieReleases.css';
-// import './../../../styles/movieDetails.css';
-import './../../../styles/movieCasts.css';
-import MapToCredits from '../MapToCredits';
+import './../../../styles/page_with_full_list.css';
+import List from './../List';
 
 
 
@@ -19,7 +17,7 @@ let MovieCasts = ({ getPeople, people, people_isFetching, filmography, filmograp
     }, []);
 
     return (
-        <div className='movie_casts_container'>
+        <>
             <div className='realeases_header border'>
                 <div className='realeases_poster'>
                     <NavLink to={`/people/${props.match.params.people_id}`} className='link'>
@@ -33,7 +31,11 @@ let MovieCasts = ({ getPeople, people, people_isFetching, filmography, filmograp
                 <br />
             </div>
 
-            {filmography.crew && filmography.crew.map((item, index) => <MapToCredits key={item.id} item={item} config={{
+
+            <List id={null} data={filmography.cast} type={{context: 'people cast', view: 'vertical'}} />
+
+
+            {/* {filmography.cast && filmography.cast.map((item, index) => <MapToCredits key={item.id} item={item} config={{
                 title: 'Актеры',
                 text: {
                     name: 'name',
@@ -44,11 +46,11 @@ let MovieCasts = ({ getPeople, people, people_isFetching, filmography, filmograp
                     no_photo: '/img/no_poster.jpg',
                     path: 'https://image.tmdb.org/t/p/w500'
                 },
-                target: '/people/',
-                link: '/people_crew/',
+                target: '/movie_info/',
+                link: '/people_filmography/',
                 class: 'movie_casts_list'
-            }} />)}
-        </div>
+            }} />)} */}
+        </>
     )
 }
 

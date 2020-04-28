@@ -3,7 +3,7 @@ import { config_api } from '../api/config_api';
 
 
 const FETCHING_POPULAR_MOVIES = 'FETCHING_POPULAR_MOVIES';
-const MOVIE_DETAILS_IS_FETCHING = 'MOVIE_DETAILS_IS_FETCHING';
+const MOVIE_INFO_IS_FETCHING = 'MOVIE_INFO_IS_FETCHING';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const FETCHING_MOVIE_DETAILES = 'FETCHING_MOVIE_DETAILES';
 const FETCHING_CREDITS = 'FETCHING_CREDITS';
@@ -17,8 +17,8 @@ let initialState = {
     total_results: 0,
     total_pages: 0,
     current_page: 1,
-    movie_details: {},
-    movie_details_isFetching: false,
+    movie_info: {},
+    movie_info: false,
     credits: [],
     credits_isFetching: false,
     releases: [],
@@ -59,7 +59,7 @@ const movie_reducer = (state = initialState, action) => {
         case FETCHING_MOVIE_DETAILES:
             return {
                 ...state,
-                movie_details: action.payload
+                movie_info: action.payload
             };
 
         case FETCHING_CREDITS:
@@ -77,10 +77,10 @@ const movie_reducer = (state = initialState, action) => {
             };
 
 
-        case MOVIE_DETAILS_IS_FETCHING:
+        case MOVIE_INFO_IS_FETCHING:
             return {
                 ...state,
-                movie_details_isFetching: true
+                movie_info_isFetching: true
             };
         default:
             return state;
@@ -96,7 +96,7 @@ const setCurrentPageAC = (payload) => ({ type: SET_CURRENT_PAGE, payload });
 const fetchingMovieDetailes = (payload) => ({ type: FETCHING_MOVIE_DETAILES, payload });
 const setCreditsAC = (payload) => ({ type: FETCHING_CREDITS, payload });
 const setReleasesAC = (payload) => ({ type: FETCHING_RELEASES, payload });
-const movie_details_isFetching = () => ({ type: MOVIE_DETAILS_IS_FETCHING });
+const movie_info_isFetching = () => ({ type: MOVIE_INFO_IS_FETCHING });
 
 
 
@@ -146,7 +146,7 @@ export const getDetails = (movie_id) => async (dispatch) => {
             console.log('movie details', response);
             console.log('video', response.videos.results);
             dispatch(fetchingMovieDetailes(response));
-            dispatch(movie_details_isFetching());
+            dispatch(movie_info_isFetching());
 
         })
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import mySetDate from '../../../common/mySetDate';
 import PhotoModal from './PhotoModal';
-
+import './../../../styles/info_pages.css';
 
 
 const PeopleHeader = ({people, getImages, people_image, images_isFetching}) => {

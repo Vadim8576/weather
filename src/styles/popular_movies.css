@@ -13,15 +13,7 @@
 
 
 
-
 .card_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.card_container_wrap {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -92,9 +84,3 @@
     font-size: 0.7em;
 }
 
-
-.pagination_container {
-    display: flex;
-    justify-content: center;
-    /* text-align: center; */
-}
