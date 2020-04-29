@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NavItem from './NavItem';
-import { NavLink, Redirect, withRouter, Route } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';

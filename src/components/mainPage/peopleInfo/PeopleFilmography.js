@@ -31,7 +31,7 @@ let MovieCasts = ({ getPeople, people, people_isFetching, filmography, filmograp
                 <br />
             </div>
 
-
+Добавить сортировку по году<br /><br />
             <List id={null} data={filmography.cast} type={{context: 'people cast', view: 'vertical'}} />
 
 
