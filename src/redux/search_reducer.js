@@ -3,13 +3,15 @@ import { search_api } from '../api/search_api';
 
 
 const SET_FOUND_MOVIES = 'SEARCH_MOVIES';
+const SET_FOUND_MOVIES_DROPDOWN = 'SET_FOUND_MOVIES_DROPDOWN';
 
 
 
 
 let initialState = {
     found_movies: [],
-    isFetching: false
+    isFetching: false,
+    found_movies_dropdown: []
 };
 
 
@@ -22,6 +24,12 @@ const search_reducer = (state = initialState, action) => {
                 ...state,
                 found_movies: action.payload,
                 isFetching: true
+            };
+
+        case SET_FOUND_MOVIES_DROPDOWN:
+            return {
+                ...state,
+                found_movies_dropdown: action.payload
             };
 
 
@@ -41,6 +49,7 @@ const search_reducer = (state = initialState, action) => {
 
 
 const setFoundMovies = (payload) => ({ type: SET_FOUND_MOVIES, payload });
+const setFoundMoviesDropdown = (payload) => ({ type: SET_FOUND_MOVIES_DROPDOWN, payload });
 
 
 
@@ -50,13 +59,18 @@ export const searchMovies = (query) => (dispatch) => {
         .then(response => {
 
             console.log('Found_movie ', response);
-
-            // const payload = {
-            //     popular_movies: response.results,
-            //     total_results: response.total_results,
-            //     total_pages: response.total_pages
-            // }
             dispatch(setFoundMovies(response.results));
+        
+        })
+}
+
+export const searchMoviesDropdown = (query) => (dispatch) => {
+
+    search_api.searchMovie(query)
+        .then(response => {
+
+            // console.log('Found_movie ', response);
+            dispatch(setFoundMoviesDropdown(response.results));
         
         })
 }
