@@ -8,7 +8,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const FETCHING_MOVIE_DETAILES = 'FETCHING_MOVIE_DETAILES';
 const FETCHING_CREDITS = 'FETCHING_CREDITS';
 const FETCHING_RELEASES = 'FETCHING_RELEASES';
-
+const FETCHING_GENRE = 'FETCHING_GENRE';
 
 
 let initialState = {
@@ -22,18 +22,21 @@ let initialState = {
     credits: [],
     credits_isFetching: false,
     releases: [],
-    releases_isFetching: false
+    releases_isFetching: false,
+    genre: []
 };
 
-/*
-state = {
-    popular_movie: [1,2,3,4]
-}
-*/
+
 
 const movie_reducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case FETCHING_GENRE:
+            return {
+                ...state,
+                genre: action.payload
+            };
+
         case FETCHING_POPULAR_MOVIES:
             return {
                 ...state,
@@ -94,9 +97,30 @@ const fetchingPopularMoviesAC = (payload) => ({ type: FETCHING_POPULAR_MOVIES, p
 // const moviesIsFetching = () => ( {type: MOVIES_IS_FETCHING} );
 const setCurrentPageAC = (payload) => ({ type: SET_CURRENT_PAGE, payload });
 const fetchingMovieDetailes = (payload) => ({ type: FETCHING_MOVIE_DETAILES, payload });
+const genreFetching = (payload) => ({ type: FETCHING_GENRE, payload });
 const setCreditsAC = (payload) => ({ type: FETCHING_CREDITS, payload });
 const setReleasesAC = (payload) => ({ type: FETCHING_RELEASES, payload });
 const movie_info_isFetching = () => ({ type: MOVIE_INFO_IS_FETCHING });
+
+
+
+export const getGenre = () => (dispatch) => {
+
+    movie_api.getPopularMovies(1)
+        .then(response => {
+
+            console.log('movie ', response);
+
+            const payload = {
+                popular_movies: response.results,
+                total_results: response.total_results,
+                total_pages: response.total_pages
+            }
+            dispatch(fetchingPopularMoviesAC(payload));
+            // dispatch(moviesIsFetching());
+        })
+}
+
 
 
 
