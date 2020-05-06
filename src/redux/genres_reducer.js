@@ -1,10 +1,10 @@
 import { genres_api } from '../api/genres_api';
+import { updateObjectInArray } from './../utils/genres_reducer_helper';
 
 
 
 
 const FETCHING_GENRES = 'FETCHING_GENRES';
-const TOGGLE_CLASS = 'TOGGLE_CLASS';
 const SET_REQUEST_DATA= 'SET_REQUEST_DATA';
 const SET_REQUEST_DATA_GENRE_IDS= 'SET_REQUEST_DATA_GENRE_IDS';
 
@@ -14,11 +14,12 @@ const SET_REQUEST_DATA_GENRE_IDS= 'SET_REQUEST_DATA_GENRE_IDS';
 let initialState = {
     genres: [],
     request: {
-        sort_by: '',
+        sort_by: 'popularity.asc',
         release_date_gte: '',
         release_date_lte: '',
         genres_ids: []
-    }
+    },
+    request_btn_is_visible: false
 };
 
 
@@ -39,34 +40,22 @@ const genres_reducer = (state = initialState, action) => {
                 request: {
                     ...state.request,
                     ...action.payload
-                }
+                },
+                request_btn_is_visible: true
             };
             
         }
 
-        case SET_REQUEST_DATA_GENRE_IDS: {
-            console.log(action.payload);
+        case SET_REQUEST_DATA_GENRE_IDS: 
             return {
                 ...state,
-                request:  {
+                request: {
                     ...state.request,
-                    ...state.request.genres_ids, ...action.payload
-                }
+                    genres_ids: updateObjectInArray(state.request.genres_ids, action.payload)
+                },
+                request_btn_is_visible: true
             };
             
-        }
-            
-        case TOGGLE_CLASS:
-            return {
-                ...state,
-                genres: state.genres.map((genres_class) => {
-                    if (genres_class.id === action.payload) {
-                        genres_class.isActive = !genres_class.isActive;
-                        // console.log('todo', todo);
-                    }
-                    return genres_class;
-                })
-            }
         default:
             return state;
     }
@@ -79,8 +68,6 @@ const genres_reducer = (state = initialState, action) => {
 const genresFetching = (payload) => ({ type: FETCHING_GENRES, payload });
 const setRequestDataAC = (payload) => ({ type: SET_REQUEST_DATA, payload });
 const setRequestDataGenreIdsAC = (payload) => ({ type: SET_REQUEST_DATA_GENRE_IDS, payload });
-const ToggleClassAC = (id) => ({ type: 'TOGGLE_CLASS', payload: id });
-
 
 
 export const setRequestData = (payload) => (dispatch) => {
@@ -91,14 +78,7 @@ export const setRequestDataGenreIds = (payload) => (dispatch) => {
     dispatch(setRequestDataGenreIdsAC(payload));
 }
 
-
-export const ToggleClass = (id) => (dispatch) => {
-    dispatch(ToggleClassAC(id));
-}
-
-
 export const getGenres = () => (dispatch) => {
-
     genres_api.getGenres()
         .then(response => {
 

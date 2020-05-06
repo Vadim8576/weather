@@ -4,18 +4,20 @@ const api_key = 'api_key='+process.env.REACT_APP_TOKEN;
 
 
 const instanse = axios.create({
-    baseURL: 'https://api.themoviedb.org/3/genre/'
+    baseURL: 'https://api.themoviedb.org/3/discover/'
 });
 
 
 
 
-export const genres_api = {
+export const discover_api = {
 
-    getGenres() {
-        const params = '&language=ru-RU';
+    discover_movies({sort_by, release_date_gte, release_date_lte, genres_ids}) {
+        const current_page=1;
+        const params = '&language=ru-RU&sort_by='+sort_by+'&include_adult=false&include_video=false&with_genres='+genres_ids.join(',')
+        +'&release_date.gte='+release_date_gte+'&release_date.lte='+release_date_lte+'&page='+current_page;
         return instanse
-                .get('movie/list?' + api_key + params)
+                .get('movie?' + api_key + params)
                 .then(response => response.data)
     }
 }

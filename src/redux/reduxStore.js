@@ -5,6 +5,8 @@ import movie_reducer from './movie_reducer';
 import people_reducer from './people_reducer';
 import search_reducer from './search_reducer';
 import genres_reducer from './genres_reducer';
+import discover_reducer from './discover_reducer';
+
 
 
 let redusers = combineReducers({
@@ -12,7 +14,8 @@ let redusers = combineReducers({
     movies: movie_reducer,
     people: people_reducer,
     found_movies: search_reducer,
-    genres: genres_reducer
+    genres: genres_reducer,
+    discover: discover_reducer
 });
 
 

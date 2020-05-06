@@ -5,30 +5,23 @@ import PaginationButtons from './../pagination/PaginationButtons';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getGenres, setRequestData, setRequestDataGenreIds } from '../../redux/genres_reducer';
+import { getDiscoverMovies } from '../../redux/discover_reducer';
 
 
-const PopularMovies = ({ popular_movies, popular_movies_isFetching, getGenres, genres, setRequestData, request, setRequestDataGenreIds, genres_class, ...props }) => {
 
-    console.log('request=', request);
+const PopularMovies = ({ discover_movies, getDiscoverMovies, discover_movies_is_fetching, popular_movies, popular_movies_isFetching, getGenres, genres, setRequestData, request, setRequestDataGenreIds, request_btn_is_visible, ...props }) => {
+
+
+    // console.log('request=', request);
 
     useEffect(() => {
         getGenres();
     }, []);
 
-
-    let ids = [];
-
-    // const cls = [''];
-
-    // if (genres_class) {
-    //     cls.push(' active');
-    // }
-
-
-    
-    // const [id, setId] = useState([]);
-    // setId(id => [...id, 'query']);
-    // console.log(id);
+    useEffect(() => {
+        console.log('discover_movies_is_fetching=', discover_movies_is_fetching);
+        console.log('popular_movies_isFetching=', popular_movies_isFetching);
+    }, [discover_movies_is_fetching, popular_movies_isFetching]);
 
 
     return (
@@ -45,12 +38,12 @@ const PopularMovies = ({ popular_movies, popular_movies_isFetching, getGenres, g
                         <p>Сортировать по:</p>
 
                         <select onChange={(e) => setRequestData({ sort_by: e.target.value })}>
-                            <option value='popularity.asc'>популярности (убывание)</option>
-                            <option value='popularity.desc'>популярности (возрастание)</option>
-                            <option value='original_title.asc'>названию (убывание)</option>
-                            <option value='original_title.desc'>названию (возрастание)</option>
-                            <option value='release_date.asc'>дата релиза (убывание)</option>
-                            <option value='release_date.desc'>дата релиза (возрастание)</option>
+                            <option value='popularity.asc'>популярности (возрастание)</option>
+                            <option value='popularity.desc'>популярности (убывание)</option>
+                            <option value='original_title.asc'>названию (возрастание)</option>
+                            <option value='original_title.desc'>названию (убывание)</option>
+                            <option value='release_date.asc'>дата релиза (возрастание)</option>
+                            <option value='release_date.desc'>дата релиза (убывание)</option>
                         </select>
                     </div>
                     <div className='filter border'>
@@ -58,62 +51,56 @@ const PopularMovies = ({ popular_movies, popular_movies_isFetching, getGenres, g
                         <hr />
                         <p>Дата выхода:</p>
                         <label>
-                            от <input type='date' name='release_date_gte' onChange={(e) => setRequestData({ release_date_gte: e.target.value })} />
+                            от <input type='date' onChange={(e) => setRequestData({ release_date_gte: e.target.value })} />
                             <br />
-                            до <input type='date' name='release_date_lte' onChange={(e) => setRequestData({ release_date_lte: e.target.value })} />
+                            до <input type='date' onChange={(e) => setRequestData({ release_date_lte: e.target.value })} />
                         </label>
                         <hr />
                         <p>Жанры:</p>
-                        {genres && genres.map((item, index) => <span key={item.id} onClick={() => {
-
-                            // setRequestDataGenreIds({ genres_ids: item.id });
-
-
-                            if (ids.length > 0) {
-                                const id = ids.indexOf(item.id);
-                                if (id != -1) { // если такой уже есть - удалить
-                                    // setRequestData({ genres_ids: item.id });
-                                    // setRequestData({genres_ids: request.genres_ids = request.genres_ids.filter(genre => genre !== item.id)});
-                                    ids = ids.filter(genre => genre !== item.id).join();
-                                } else { // если такого нет - добавить
-                                    // setRequestData({ genres_ids: item.id });
-                                    ids.push(item.id);
-
-                                }
-                            } else {
-                                // setRequestData({ genres_ids: item.id });
-                                ids.push(item.id);
-                            }
-
-                            // const idstr = ids.join();
-                            setRequestDataGenreIds( ids )
-                            console.log(ids);
-
-                        }
-
-                        } className={'border'}>{item.name}</span>)
+                        {genres && genres.map((item, index) =>
+                            <span
+                                className={request.genres_ids.indexOf(item.id) !== -1 ? 'active border' : 'border'}
+                                key={item.id}
+                                onClick={() => setRequestDataGenreIds(item.id)}
+                            >
+                                {item.name}
+                            </span>)
                         }
                     </div>
 
                 </div>
+                {request_btn_is_visible &&
+                    <div className='request_btn' onClick={() => {
+                        getDiscoverMovies(request);
+                    }}>Применить</div>
+                }
 
                 <div className='right_side'>
-                    {popular_movies_isFetching && <PaginationButtons {...props} />}
 
+
+                    <h3>Сделать отдельный редюсер для пагинации</h3>
+
+
+                    
+                    <PaginationButtons {...props} />
                     <hr />
-
                     <div className='card_container'>
-                        {popular_movies_isFetching
-                            ? popular_movies.map(item =>
-                                <NavLink to={`/movie_info/${item.id}`} className='navbar-brand' key={item.id}>
-                                    <Card {...item} />
+                        {discover_movies_is_fetching
+                           &&  <Cards data={discover_movies} is_fetching={discover_movies_is_fetching} />
+                            
+                        }
 
-                                </NavLink>)
+                        {popular_movies_isFetching
+                            ? <Cards data={popular_movies} is_fetching={popular_movies_isFetching} />
                             : <Spinner animation='border' />
                         }
+
+
+
+
                     </div>
                     <hr />
-                    {popular_movies_isFetching && <PaginationButtons {...props} />}
+                    <PaginationButtons {...props} />
                 </div>
 
 
@@ -127,23 +114,26 @@ const PopularMovies = ({ popular_movies, popular_movies_isFetching, getGenres, g
 
 
 
-const Card = ({ poster_path, ...props }) => {
+const Cards = ({ data, is_fetching }) => {
     return (
-        <div className='card'>
-            <div className='content'>
-                <img src={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : '/img/no_poster.jpg'} alt='популярный фильм' />
+        <>
+            {data.map(item =>
+                <NavLink to={`/movie_info/${item.id}`} className='navbar-brand' key={item.id}>
+                    <div className='card'>
+                        <div className='content'>
+                            <img src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : '/img/no_poster.jpg'} alt='популярный фильм' />
 
-                {/* <div className=''></div> */}
-                <div className='description'>
-                    <span><b>{props.title}</b></span>
-                    <span><i>{props.release_date}</i></span>
-                    <span>Рейтинг: {props.vote_average}</span>
-                </div>
-            </div>
-
-
-
-        </div>
+                            {/* <div className=''></div> */}
+                            <div className='description'>
+                                <span><b>{item.title}</b></span>
+                                <span><i>{item.release_date}</i></span>
+                                <span>Рейтинг: {item.vote_average}</span>
+                            </div>
+                        </div>
+                    </div>
+                </NavLink>)
+            }
+        </>
     )
 }
 
@@ -151,7 +141,9 @@ const Card = ({ poster_path, ...props }) => {
 const mapStateToProps = state => ({
     genres: state.genres.genres,
     request: state.genres.request,
-    genres_class: state.genres.genres_class
+    request_btn_is_visible: state.genres.request_btn_is_visible,
+    discover_movies_is_fetching: state.discover.discover_movies_is_fetching,
+    discover_movies: state.discover.discover_movies
 })
 
 
@@ -162,5 +154,6 @@ export default connect(mapStateToProps,
     {
         getGenres,
         setRequestData,
-        setRequestDataGenreIds
+        setRequestDataGenreIds,
+        getDiscoverMovies
     })(PopularMovies);

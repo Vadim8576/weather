@@ -42,7 +42,7 @@
     /* white-space: pre-line; */
 }
 .left_side span.active {
-    background-color: rgb(147, 167, 253);
+    background-color: rgb(103, 130, 252);
 }
 
 .left_side span:hover {
@@ -50,10 +50,27 @@
     cursor: pointer;
 }
 
+.request_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
+    background-color: rgb(1, 114, 1);
+    color: #fff;
+    z-index: 100;
+    cursor: pointer;
+}
+
+
+
+
 .right_side {
     width: 70%;
 }
-
 
 
 
