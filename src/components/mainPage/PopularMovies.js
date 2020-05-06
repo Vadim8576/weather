@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getGenres, setRequestData, setRequestDataGenreIds } from '../../redux/genres_reducer';
 import { getDiscoverMovies } from '../../redux/discover_reducer';
+import { setCurrentPage } from '../../redux/pagination_reducer';
 
 
 
@@ -100,7 +101,7 @@ const PopularMovies = ({ discover_movies, getDiscoverMovies, discover_movies_is_
 
                     </div>
                     <hr />
-                    <PaginationButtons {...props} />
+                    {/* <PaginationButtons {...props} /> */}
                 </div>
 
 
@@ -143,7 +144,9 @@ const mapStateToProps = state => ({
     request: state.genres.request,
     request_btn_is_visible: state.genres.request_btn_is_visible,
     discover_movies_is_fetching: state.discover.discover_movies_is_fetching,
-    discover_movies: state.discover.discover_movies
+    discover_movies: state.discover.discover_movies,
+    current_page: state. pagination.current_page,
+    total_pages: state.pagination.total_pages
 })
 
 
@@ -153,6 +156,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps,
     {
         getGenres,
+        setCurrentPage,
         setRequestData,
         setRequestDataGenreIds,
         getDiscoverMovies

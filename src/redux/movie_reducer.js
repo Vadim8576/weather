@@ -1,10 +1,13 @@
 import { movie_api } from '../api/movie_api';
 import { config_api } from '../api/config_api';
 
+import {setTotalPages} from './pagination_reducer';
+import {setCurrentPage} from './pagination_reducer';
+
 
 const FETCHING_POPULAR_MOVIES = 'FETCHING_POPULAR_MOVIES';
 const MOVIE_INFO_IS_FETCHING = 'MOVIE_INFO_IS_FETCHING';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+// const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const FETCHING_MOVIE_DETAILES = 'FETCHING_MOVIE_DETAILES';
 const FETCHING_CREDITS = 'FETCHING_CREDITS';
 const FETCHING_RELEASES = 'FETCHING_RELEASES';
@@ -41,8 +44,8 @@ const movie_reducer = (state = initialState, action) => {
             return {
                 ...state,
                 popular_movies: action.payload.popular_movies,
-                total_results: action.payload.total_results,
-                total_pages: action.payload.total_pages,
+                // total_results: action.payload.total_results,
+                // total_pages: action.payload.total_pages,
                 popular_movies_isFetching: true
             };
 
@@ -52,11 +55,11 @@ const movie_reducer = (state = initialState, action) => {
         //         isFetching: true
         //     };
 
-        case SET_CURRENT_PAGE:
-            return {
-                ...state,
-                current_page: action.payload
-            };
+        // case SET_CURRENT_PAGE:
+        //     return {
+        //         ...state,
+        //         current_page: action.payload
+        //     };
 
 
         case FETCHING_MOVIE_DETAILES:
@@ -95,7 +98,7 @@ const movie_reducer = (state = initialState, action) => {
 
 const fetchingPopularMoviesAC = (payload) => ({ type: FETCHING_POPULAR_MOVIES, payload });
 // const moviesIsFetching = () => ( {type: MOVIES_IS_FETCHING} );
-const setCurrentPageAC = (payload) => ({ type: SET_CURRENT_PAGE, payload });
+// const setCurrentPageAC = (payload) => ({ type: SET_CURRENT_PAGE, payload });
 const fetchingMovieDetailes = (payload) => ({ type: FETCHING_MOVIE_DETAILES, payload });
 const genreFetching = (payload) => ({ type: FETCHING_GENRE, payload });
 const setCreditsAC = (payload) => ({ type: FETCHING_CREDITS, payload });
@@ -104,7 +107,7 @@ const movie_info_isFetching = () => ({ type: MOVIE_INFO_IS_FETCHING });
 
 
 
-export const getGenre = () => (dispatch) => {
+export const getGenres = () => (dispatch) => {
 
     movie_api.getPopularMovies(1)
         .then(response => {
@@ -125,42 +128,46 @@ export const getGenre = () => (dispatch) => {
 
 
 
-export const fetchingPopularMovies = () => (dispatch) => {
-
-    movie_api.getPopularMovies(1)
-        .then(response => {
-
-            console.log('movie ', response);
-
-            const payload = {
-                popular_movies: response.results,
-                total_results: response.total_results,
-                total_pages: response.total_pages
-            }
-            dispatch(fetchingPopularMoviesAC(payload));
-            // dispatch(moviesIsFetching());
-        })
-}
-
-
-
-export const setCurrentPage = (current_page) => (dispatch) => {
+export const fetchingPopularMovies = (current_page) => (dispatch) => {
 
     movie_api.getPopularMovies(current_page)
         .then(response => {
 
             console.log('movie ', response);
+            
 
             const payload = {
-                popular_movies: response.results,
                 total_results: response.total_results,
                 total_pages: response.total_pages
             }
+
+            dispatch(setCurrentPage(current_page));
+            dispatch(setTotalPages(payload));
+
+            payload.popular_movies = response.results;
+           
             dispatch(fetchingPopularMoviesAC(payload));
-            // dispatch(moviesIsFetching());
-            // dispatch(setCurrentPageAC(current_page));
+
         })
 }
+
+
+
+// export const setCurrentPage = (current_page) => (dispatch) => {
+
+//     movie_api.getPopularMovies(current_page)
+//         .then(response => {
+
+//             console.log('movie ', response);
+
+//             const payload = {
+//                 popular_movies: response.results,
+//                 total_results: response.total_results,
+//                 total_pages: response.total_pages
+//             }
+//             dispatch(fetchingPopularMoviesAC(payload));
+//         })
+// }
 
 
 export const getDetails = (movie_id) => async (dispatch) => {
