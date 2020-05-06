@@ -1,4 +1,5 @@
 import { discover_api } from '../api/discover_api';
+import {setTotalPages, setCurrentPage} from './pagination_reducer';
 
 
 
@@ -42,10 +43,19 @@ const genresFetching = (payload) => ({ type: FETCHING_DISCOVER_MOVIES, payload }
 
 
 export const getDiscoverMovies = (request) => (dispatch) => {
-    discover_api.discover_movies(request )
+    discover_api.discover_movies(request)
         .then(response => {
 
             console.log('discover_movies ', response);
+
+
+            const payload = {
+                total_results: response.total_results,
+                total_pages: response.total_pages
+            }
+    
+            dispatch(setTotalPages(payload));
+            dispatch(setCurrentPage(1));
 
             dispatch(genresFetching(response.results));
         })

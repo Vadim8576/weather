@@ -10,7 +10,17 @@ import { setCurrentPage } from '../../redux/pagination_reducer';
 
 
 
-const PopularMovies = ({ discover_movies, getDiscoverMovies, discover_movies_is_fetching, popular_movies, popular_movies_isFetching, getGenres, genres, setRequestData, request, setRequestDataGenreIds, request_btn_is_visible, ...props }) => {
+const PopularMovies = ({ discover_movies,
+    getDiscoverMovies,
+    discover_movies_is_fetching,
+    popular_movies, popular_movies_isFetching,
+    getGenres,
+    genres,
+    setRequestData,
+    request,
+    setRequestDataGenreIds,
+    request_btn_is_visible,
+    ...props }) => {
 
 
     // console.log('request=', request);
@@ -77,12 +87,9 @@ const PopularMovies = ({ discover_movies, getDiscoverMovies, discover_movies_is_
                 }
 
                 <div className='right_side'>
-
-
-                    <h3>Сделать отдельный редюсер для пагинации</h3>
-
-
                     
+                <h4>При нажатии на кнопку ПРИМЕНИТЬ, сделать переход на другую страницу с параметрами</h4>
+
                     <PaginationButtons {...props} />
                     <hr />
                     <div className='card_container'>
@@ -97,11 +104,9 @@ const PopularMovies = ({ discover_movies, getDiscoverMovies, discover_movies_is_
                         }
 
 
-
-
                     </div>
                     <hr />
-                    {/* <PaginationButtons {...props} /> */}
+                    <PaginationButtons {...props} />
                 </div>
 
 

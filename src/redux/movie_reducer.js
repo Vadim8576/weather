@@ -1,8 +1,7 @@
 import { movie_api } from '../api/movie_api';
 import { config_api } from '../api/config_api';
 
-import {setTotalPages} from './pagination_reducer';
-import {setCurrentPage} from './pagination_reducer';
+import {setTotalPages, setCurrentPage} from './pagination_reducer';
 
 
 const FETCHING_POPULAR_MOVIES = 'FETCHING_POPULAR_MOVIES';
