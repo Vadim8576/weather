@@ -4,7 +4,7 @@ const api_key = 'api_key='+process.env.REACT_APP_TOKEN;
 
 
 const instanse = axios.create({
-    baseURL: 'https://api.themoviedb.org/3/search/movie'
+    baseURL: 'https://api.themoviedb.org/3/search/'
 });
 
 
@@ -12,12 +12,12 @@ const instanse = axios.create({
 
 export const search_api = {
 
-    searchMovie(query) {
-        const page=1;
+    searchMovie(query, currentPage) {
+        // const page=1;
         const year = 0;
-        const params = '&language=ru-RU&query='+query+'&page='+page+'&include_adult=false'+'&year='+year;
+        const params = '&language=ru-RU&query='+query+'&page='+currentPage+'&include_adult=false'+'&year='+year;
         return instanse
-                .get('?' + api_key + params)
+                .get('movie?' + api_key + params)
                 .then(response => response.data)
     }
 }

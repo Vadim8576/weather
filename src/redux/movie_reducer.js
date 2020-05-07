@@ -140,7 +140,7 @@ export const fetchingPopularMovies = (current_page) => (dispatch) => {
                 total_pages: response.total_pages
             }
 
-            dispatch(setCurrentPage(current_page));
+            // dispatch(setCurrentPage(current_page));
             dispatch(setTotalPages(payload));
 
             payload.popular_movies = response.results;

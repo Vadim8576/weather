@@ -59,8 +59,8 @@ const List = ({ data, type, id }) => {
                 no_photo: '/img/no_poster.jpg',
                 path: 'https://image.tmdb.org/t/p/w500'
             },
-            target: '/movie_info/',
-            more_link: '/people_filmography/',
+            target: '/movie-info/',
+            more_link: '/people-filmography/',
             type: type.view
         }
     }
@@ -80,8 +80,8 @@ const List = ({ data, type, id }) => {
                 no_photo: '/img/no_poster.jpg',
                 path: 'https://image.tmdb.org/t/p/w500'
             },
-            target: '/movie_info/',
-            more_link: '/people_crew/',
+            target: '/movie-info/',
+            more_link: '/people-crew/',
             type: type.view
         }
     }

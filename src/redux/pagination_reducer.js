@@ -46,6 +46,7 @@ export const setTotalPages = (payload) => (dispatch) => {
 }
 
 export const setCurrentPage = (payload) => (dispatch) => {
+    console.log('currPage=', payload);
     dispatch(setCurrentPageAC(payload));
 }
 

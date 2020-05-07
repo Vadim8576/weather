@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from 'react-bootstrap';
 import mySetDate from '../../../common/mySetDate';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './../../../styles/info_pages.css';
 
 
@@ -58,7 +58,12 @@ const MovieDetailsHeader = ({ movie_info }) => {
                 <p>Сборы: {movie_info.revenue ? movie_info.revenue + '$' : 'нет данных'}</p>
                 <p>Продолжительность: {movie_info.runtime ? movie_info.runtime + ' мин' : 'нет данных'}</p>
                 <p>Статус: {movie_info.status ? movie_info.status : 'нет данных'}</p>
-                <p>Домашняя страница: {movie_info.homepage ? movie_info.homepage : 'нет данных'}</p>
+                
+                {movie_info.homepage
+                && <p><a href={movie_info.homepage} target='_blank' className='nav-link'>Домашняя страница</a></p>  
+                }
+                
+                {/* <p>Домашняя страница: {movie_info.homepage ? movie_info.homepage : 'нет данных'}</p> */}
                 {movie_info.overview
                     ? <>
                         <details>

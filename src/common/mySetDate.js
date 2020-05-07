@@ -8,7 +8,7 @@ const mySetDate = (d) => {
         // second: 'numeric',
         timezone: 'UTC'
     };
-    return new Date(d).toLocaleString("ru", options);
+    return d==='' ? null : new Date(d).toLocaleString("fr-CA", options);
 }
 
 

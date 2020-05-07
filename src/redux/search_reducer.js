@@ -1,4 +1,5 @@
 import { search_api } from '../api/search_api';
+import {setTotalPages, setCurrentPage} from './pagination_reducer';
 
 
 
@@ -53,12 +54,22 @@ const setFoundMoviesDropdown = (payload) => ({ type: SET_FOUND_MOVIES_DROPDOWN, 
 
 
 
-export const searchMovies = (query) => (dispatch) => {
+export const searchMovies = (query, currentPage=1) => (dispatch) => {
 
-    search_api.searchMovie(query)
+    search_api.searchMovie(query, currentPage)
         .then(response => {
 
             console.log('Found_movie ', response);
+
+            const payload = {
+                total_results: response.total_results,
+                total_pages: response.total_pages
+            }
+    
+            dispatch(setTotalPages(payload));
+            // dispatch(setCurrentPage(currentPage));
+
+
             dispatch(setFoundMovies(response.results));
         
         })

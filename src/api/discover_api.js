@@ -12,10 +12,13 @@ const instanse = axios.create({
 
 export const discover_api = {
 
-    discover_movies({sort_by, release_date_gte, release_date_lte, genres_ids}) {
-        const current_page=1;
+    discover_movies(request, currentPage=1) {
+
+        const {sort_by, release_date_gte, release_date_lte, genres_ids} = request;
+        // console.log('params=', request);
+
         const params = '&language=ru-RU&sort_by='+sort_by+'&include_adult=false&include_video=false&with_genres='+genres_ids.join(',')
-        +'&release_date.gte='+release_date_gte+'&release_date.lte='+release_date_lte+'&page='+current_page;
+        +'&release_date.gte='+release_date_gte+'&release_date.lte='+release_date_lte+'&page='+currentPage;
         return instanse
                 .get('movie?' + api_key + params)
                 .then(response => response.data)
