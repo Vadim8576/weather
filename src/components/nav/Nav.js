@@ -4,7 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { searchMovies, searchMoviesDropdown } from './../../redux/search_reducer';
+import { searchMoviesDropdown } from './../../redux/search_reducer';
 import './../../styles/nav.css';
 import { setCurrentPage } from './../../redux/pagination_reducer';
 
@@ -15,7 +15,8 @@ const logoPath = 'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-
 
 
 
-const Navigation = ({ isAuth, searchMovies, found_movies, searchMoviesDropdown, found_movies_dropdown, setCurrentPage, ...props }) => {
+const Navigation = ({ isAuth, found_movies, searchMoviesDropdown, found_movies_dropdown, setCurrentPage, ...props }) => {
+    
     console.log('isAuth=', isAuth);
 
     const [value, setValue] = useState('');
@@ -123,9 +124,10 @@ const Navigation = ({ isAuth, searchMovies, found_movies, searchMoviesDropdown, 
 
 const mapStateToProps = state => ({
     found_movies: state.found_movies.found_movies,
+    found_person: state.found_movies.found_person,
     found_movies_dropdown: state.found_movies.found_movies_dropdown
 })
 
 
-export default compose(connect(mapStateToProps, { searchMovies, searchMoviesDropdown, setCurrentPage }), withRouter)(Navigation);
+export default compose(connect(mapStateToProps, { searchMoviesDropdown, setCurrentPage }), withRouter)(Navigation);
 // export default Navigation;

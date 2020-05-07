@@ -101,6 +101,23 @@
 }
 
 
+.card_wrapp {
+    position: relative;
+}
+
+.card_wrapp .rate {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    z-index: 50;
+}
+
+.card_wrapp .rate .btn {
+   height: 40px;
+   width: 40px;
+   background-color: rgb(27, 212, 42);
+   border-radius: 50%;
+}
 
 .card {
     padding: 10px;

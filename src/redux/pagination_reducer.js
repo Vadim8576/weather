@@ -41,12 +41,12 @@ const setCurrentPageAC = (payload) => ({ type: SET_CURRENT_PAGE, payload });
 
 
 export const setTotalPages = (payload) => (dispatch) => {
-    console.log(payload);
+    // console.log(payload);
     dispatch(setTotalPagesAC(payload));
 }
 
 export const setCurrentPage = (payload) => (dispatch) => {
-    console.log('currPage=', payload);
+    // console.log('currPage=', payload);
     dispatch(setCurrentPageAC(payload));
 }
 

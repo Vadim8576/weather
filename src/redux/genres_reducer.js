@@ -34,7 +34,7 @@ export const getGenres = () => (dispatch) => {
     genres_api.getGenres()
         .then(response => {
 
-            console.log('genres ', response.genres);
+            // console.log('genres ', response.genres);
 
             dispatch(genresFetching(response.genres));
         })

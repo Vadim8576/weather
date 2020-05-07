@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { getAuth, authentication } from './../../redux/auth_reducer';
+import { getAuth, authentication } from '../../redux/auth_reducer';
 
 
 let Login = ({ request_token, getAuth, authentication, ...props }) => {

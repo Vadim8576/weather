@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import './../../../styles/popular_movies.css';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import PaginationButtons from '../../pagination/PaginationButtons';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getGenres } from '../../../redux/genres_reducer';
 // import { fetchingPopularMovies } from '../../redux/movie_reducer';
-import { getDiscoverMovies, setRequestData, setRequestDataGenreIds, discoverMoviesIsFetching } from '../../../redux/discover_reducer';
-import { setCurrentPage } from '../../../redux/pagination_reducer';
-import FilterPanel from './FilterPanel';
 
 
 
-const MoviesList = ({ discover_movies_is_fetching, list, ...props }) => {
 
+const MoviesList = ({ discover_movies_is_fetching, list, isAuth, session_id, rateMovie, ...props }) => {
+    // debugger;
 
 
     return (
@@ -23,7 +19,7 @@ const MoviesList = ({ discover_movies_is_fetching, list, ...props }) => {
             <hr />
             <div className='card_container'>
                 {discover_movies_is_fetching
-                    ? <Cards data={list} />
+                    ? <Cards data={list} isAuth={isAuth} session_id={session_id} rateMovie={rateMovie} />
                     : <Spinner animation='border' />
                 }
             </div>
@@ -36,24 +32,85 @@ const MoviesList = ({ discover_movies_is_fetching, list, ...props }) => {
 
 
 
-const Cards = ({ data }) => {
+const Cards = ({ data, isAuth, rateMovie, session_id }) => {
+
+
+    const [rate, setRate] = useState(10);
+    // console.log('isAuth=', isAuth);
+
+    // const popover = (
+    //     <Popover id="popover-basic">
+    //         <Popover.Title as="h3">Ваш рейтинг</Popover.Title>
+    //         <Popover.Content>
+
+    //             {isAuth
+    //                 ? <><input type="number" value={rate} onChange={(e) => setRate(e.currentTarget.value)} step='0.5' min='0.5' max='10' />
+    //                     <button onClick={() => rateMovie()}>Оценить</button>
+    //                 </>
+    //                 : <>
+    //                     <p>Хотите оценить?</p>
+    //                     <NavLink to='login' className='navbar-brand'>Войти</NavLink>
+    //                 </>
+
+    //             }
+
+    //         </Popover.Content>
+    //     </Popover>
+
+    // )
+
     return (
         <>
             {data.map(item =>
-                <NavLink to={`/movie-info/${item.id}`} className='navbar-brand' key={item.id}>
-                    <div className='card'>
-                        <div className='content'>
-                            <img src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : '/img/no_poster.jpg'} alt='популярный фильм' />
+                <div className='card_wrapp' key={item.id}>
 
-                            {/* <div className=''></div> */}
-                            <div className='description'>
+                    <div className='rate'>
+                        <OverlayTrigger trigger='click' placement='right' overlay={(
+                            <Popover id="popover-basic">
+                                <Popover.Title as="h3">Ваш рейтинг</Popover.Title>
+                                <Popover.Content>
+                                    
+                                    {isAuth
+                                        ? <><input type="number" value={rate} onChange={(e) => setRate(e.currentTarget.value)} step='0.5' min='0.5' max='10' />
+                                            <button onClick={() => {
+                                                console.log(item.id);
+                                                const id=item.id;
+                                                rateMovie({ id, session_id, rate });
+                                            }
+                                            }>Оценить</button>
+                                        </>
+                                        : <>
+                                            <p>Хотите оценить?</p>
+                                            <NavLink to='login' className='navbar-brand'>Войти</NavLink>
+                                        </>
+
+                                    }
+
+                                </Popover.Content>
+                            </Popover>
+
+                        )}>
+                            <Button variant='success'>&#9733;</Button>
+                        </OverlayTrigger>
+                    </div>
+
+                    <NavLink to={`/movie-info/${item.id}`} className='navbar-brand'>
+                        <div className='card'>
+                            <div className='content'>
+                                <img src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : '/img/no_poster.jpg'} alt='популярный фильм' />
+
+
+
+
+                                {/* <div className='description'>
                                 <span><b>{item.title}</b></span>
                                 <span><i>{item.release_date}</i></span>
                                 <span>Рейтинг: {item.vote_average}</span>
+                            </div> */}
                             </div>
                         </div>
-                    </div>
-                </NavLink>)
+                    </NavLink>
+                </div>)
             }
         </>
     )

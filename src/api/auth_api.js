@@ -21,6 +21,21 @@ export const auth_api = {
         return instanse
                 .post('token/validate_with_login?'+api_key, request_body)
                 .then(response => response)
+    },
+
+
+    createSession(request_body) {
+
+       
+        request_body = {
+            "request_token": request_body
+        }
+
+        console.log('запрос на createSession', request_body );
+
+        return instanse
+                .post('session/new?'+api_key, request_body)
+                .then(response => response)
     }
 }
 

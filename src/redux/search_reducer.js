@@ -1,9 +1,9 @@
 import { search_api } from '../api/search_api';
-import {setTotalPages, setCurrentPage} from './pagination_reducer';
+import { setTotalPages } from './pagination_reducer';
 
 
 
-const SET_FOUND_MOVIES = 'SEARCH_MOVIES';
+const SET_FOUND_MULTI = 'SET_FOUND_MULTI';
 const SET_FOUND_MOVIES_DROPDOWN = 'SET_FOUND_MOVIES_DROPDOWN';
 
 
@@ -11,6 +11,8 @@ const SET_FOUND_MOVIES_DROPDOWN = 'SET_FOUND_MOVIES_DROPDOWN';
 
 let initialState = {
     found_movies: [],
+    found_person: [],
+    found_tv: [],
     isFetching: false,
     found_movies_dropdown: []
 };
@@ -20,10 +22,12 @@ let initialState = {
 const search_reducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case SET_FOUND_MOVIES:
+        case SET_FOUND_MULTI:
             return {
                 ...state,
-                found_movies: action.payload,
+                found_movies: action.payload.filter(item => item.media_type === 'movie'),
+                found_person: action.payload.filter(item => item.media_type === 'person'),
+                found_tv: action.payload.filter(item => item.media_type === 'tv'),
                 isFetching: true
             };
 
@@ -49,15 +53,16 @@ const search_reducer = (state = initialState, action) => {
 
 
 
-const setFoundMovies = (payload) => ({ type: SET_FOUND_MOVIES, payload });
+const setFoundMulti = (payload) => ({ type: SET_FOUND_MULTI, payload });
 const setFoundMoviesDropdown = (payload) => ({ type: SET_FOUND_MOVIES_DROPDOWN, payload });
 
 
 
-export const searchMovies = (query, currentPage=1) => (dispatch) => {
+export const searchMulti = (query, currentPage=1) => (dispatch) => {
 
-    search_api.searchMovie(query, currentPage)
+    search_api.searchMulti(query, currentPage)
         .then(response => {
+
 
             console.log('Found_movie ', response);
 
@@ -70,17 +75,18 @@ export const searchMovies = (query, currentPage=1) => (dispatch) => {
             // dispatch(setCurrentPage(currentPage));
 
 
-            dispatch(setFoundMovies(response.results));
+            dispatch(setFoundMulti(response.results));
         
         })
 }
 
 export const searchMoviesDropdown = (query) => (dispatch) => {
 
-    search_api.searchMovie(query)
+    search_api.searchMulti(query)
         .then(response => {
 
             // console.log('Found_movie ', response);
+            console.log('Found_movie ', response);
             dispatch(setFoundMoviesDropdown(response.results));
         
         })

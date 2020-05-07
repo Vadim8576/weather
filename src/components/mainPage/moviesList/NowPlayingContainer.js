@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 import './../../../styles/popular_movies.css';
-import { Spinner } from 'react-bootstrap';
-import PaginationButtons from '../../pagination/PaginationButtons';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getGenres } from '../../../redux/genres_reducer';
 import { getDiscoverMovies, setRequestData, setRequestDataGenreIds, discoverMoviesIsFetching } from '../../../redux/discover_reducer';
@@ -10,17 +7,14 @@ import { setCurrentPage } from '../../../redux/pagination_reducer';
 import FilterPanel from './FilterPanel';
 import MoviesList from './MoviesList';
 import mySetDate from '../../../common/mySetDate';
+import mySelectDate from '../../../common/mySelectDate';
 
 
 
-const selectDate = (month) => {
-    let D = new Date();
-    return D.setMonth(D.getMonth() + month);
-    // alert(D);
-  }
 
 
-const NowPlaying = ({ discover_movies,
+
+const NowPlayingContainer = ({ discover_movies,
     getDiscoverMovies,
     discover_movies_is_fetching,
     popular_movies, popular_movies_isFetching,
@@ -35,7 +29,6 @@ const NowPlaying = ({ discover_movies,
 
         
 
-
     useEffect(() => {
        
         getDiscoverMovies(request, props.current_page);
@@ -47,9 +40,8 @@ const NowPlaying = ({ discover_movies,
         setRequestData(
             {
                 sort_by: 'popularity.desc',
-                release_date_gte: mySetDate(selectDate(-1)),
-                release_date_lte: '',
-                // release_date_lte: selectDate(0),
+                release_date_gte: mySetDate(mySelectDate(-1, 'month'), 'fr-CA'),
+                release_date_lte: mySetDate(mySelectDate(6, 'day'), 'fr-CA'),
                 btn_is_visible: false
             }
         );
@@ -107,4 +99,4 @@ export default connect(mapStateToProps,
         setRequestDataGenreIds,
         getDiscoverMovies,
         discoverMoviesIsFetching,
-    })(NowPlaying);
+    })(NowPlayingContainer);

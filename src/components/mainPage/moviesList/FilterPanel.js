@@ -6,7 +6,7 @@ import React from 'react';
 
 const FilterPanel = ({ request, setRequestData, genres, setRequestDataGenreIds, getDiscoverMovies }) => {
 
-    console.log('request=', request);
+    // console.log('request=', request);
 
     return (
         <>

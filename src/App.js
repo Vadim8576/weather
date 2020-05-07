@@ -14,7 +14,7 @@ import { compose } from 'redux';
 
 
 
-const Login = React.lazy(() => import('./components/login/Login'));
+const Login = React.lazy(() => import('./components/login/LoginContainer'));
 const Profile = React.lazy(() => import('./components/profilePage/ProfilePageContainer'));
 const MovieInfo = React.lazy(() => import('./components/mainPage/moviesInfo/MovieInfoContainer'));
 const PeopleInfo = React.lazy(() => import('./components/mainPage/peopleInfo/PeopleInfoContainer'));
@@ -24,7 +24,8 @@ const MovieCrew = React.lazy(() => import('./components/mainPage/moviesInfo/Movi
 const PeopleFilmography = React.lazy(() => import('./components/mainPage/peopleInfo/PeopleFilmography'));
 const PeopleCrew = React.lazy(() => import('./components/mainPage/peopleInfo/PeopleCrew'));
 const Search = React.lazy(() => import('./components/mainPage/SearchContainer'));
-const NowPlaying = React.lazy(() => import('./components/mainPage/moviesList/NowPlaying'));
+const NowPlaying = React.lazy(() => import('./components/mainPage/moviesList/NowPlayingContainer'));
+const Upcoming = React.lazy(() => import('./components/mainPage/moviesList/UpcomingContainer'));
 
 
 
@@ -56,7 +57,7 @@ let App = ({ fetchWeather, ...props }) => {
 
           <Route exact path='/popular-movies' render={() => <PopularMovies />} />
           <Route exact path='/now-playing' render={withSuspense(NowPlaying)} />
-          <Route exact path='/upcoming' render={withSuspense(NowPlaying)} />
+          <Route exact path='/upcoming' render={withSuspense(Upcoming)} />
         
 
         </Switch>

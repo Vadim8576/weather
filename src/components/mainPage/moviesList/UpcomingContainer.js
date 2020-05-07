@@ -4,13 +4,17 @@ import { connect } from 'react-redux';
 import { getGenres } from '../../../redux/genres_reducer';
 import { getDiscoverMovies, setRequestData, setRequestDataGenreIds, discoverMoviesIsFetching } from '../../../redux/discover_reducer';
 import { setCurrentPage } from '../../../redux/pagination_reducer';
-import { rateMovie } from '../../../redux/movie_reducer';
 import FilterPanel from './FilterPanel';
 import MoviesList from './MoviesList';
+import mySetDate from '../../../common/mySetDate';
+import mySelectDate from '../../../common/mySelectDate';
 
 
 
-const PopularMovies = ({ discover_movies,
+
+
+
+const UpcomingContainer = ({ discover_movies,
     getDiscoverMovies,
     discover_movies_is_fetching,
     popular_movies, popular_movies_isFetching,
@@ -20,13 +24,10 @@ const PopularMovies = ({ discover_movies,
     request,
     setRequestDataGenreIds,
     discoverMoviesIsFetching,
-    isAuth,
-    rateMovie,
-    session_id,
     ...props }) => {
 
 
-
+        
 
     useEffect(() => {
        
@@ -39,8 +40,8 @@ const PopularMovies = ({ discover_movies,
         setRequestData(
             {
                 sort_by: 'popularity.desc',
-                release_date_gte: '',
-                release_date_lte: '',
+                release_date_gte: mySetDate(mySelectDate(7, 'day'), 'fr-CA'),
+                release_date_lte: mySetDate(mySelectDate(1, 'month'), 'fr-CA'),
                 btn_is_visible: false
             }
         );
@@ -67,9 +68,6 @@ const PopularMovies = ({ discover_movies,
                 <MoviesList
                     discover_movies_is_fetching={discover_movies_is_fetching}
                     list={discover_movies}
-                    isAuth={isAuth}
-                    rateMovie={rateMovie}
-                    session_id={session_id}
                     {...props}
                 />
             </div>
@@ -86,10 +84,7 @@ const mapStateToProps = state => ({
     discover_movies: state.discover.discover_movies,
     current_page: state. pagination.current_page,
     total_pages: state.pagination.total_pages,
-    total_results: state.pagination.total_results,
-    isAuth: state.auth.isAuth,
-    session_id: state.auth.session_id,
-
+    total_results: state.pagination.total_results
 })
 
 
@@ -104,5 +99,4 @@ export default connect(mapStateToProps,
         setRequestDataGenreIds,
         getDiscoverMovies,
         discoverMoviesIsFetching,
-        rateMovie
-    })(PopularMovies);
+    })(UpcomingContainer);

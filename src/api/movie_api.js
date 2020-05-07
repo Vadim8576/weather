@@ -40,6 +40,13 @@ export const movie_api = {
                 .get(movie_id + '/release_dates?' + api_key)
                 .then(response => response.data)
                 
+    },
+
+    rateMovie({id, session_id, rate}) {
+        return instanse
+                .post(id + '/rating?' + api_key + '&session_id=' + session_id, {'value': rate})
+                .then(response => response.data)
+                
     }
 }
 

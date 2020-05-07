@@ -38,7 +38,7 @@ const MovieDetailsHeader = ({ movie_info }) => {
                 <p>Слоган: {movie_info.tagline ? movie_info.tagline : 'нет данных'}</p>
                 <p>Жанр: {movie_info.genres ? movie_info.genres.map(i => i.name + ', ') : 'нет данных'}</p>
                 <p>Дата релиза: {release_date} &nbsp;
-                                <NavLink to={`/movie_releases/${movie_info.id}`} className='nav-link'>подробнее</NavLink>
+                                <NavLink to={`/movie-releases/${movie_info.id}`} className='nav-link'>подробнее</NavLink>
                 </p>
                 <p>Страна производства: {movie_info.production_countries ? movie_info.production_countries.map(i => i.name + ', ') : 'нет данных'}</p>
                 <p>Студия:

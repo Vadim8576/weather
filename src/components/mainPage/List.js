@@ -89,7 +89,8 @@ const List = ({ data, type, id }) => {
 
 
     return (
-        <>
+        <>  {len > 0 &&
+            <>
             <div className='credits_tittle bg-primary'>
                 <span className='text-white'>{config.title}:</span>
             </div>
@@ -98,7 +99,7 @@ const List = ({ data, type, id }) => {
                     if (!id) count = len;
                     if (index < count) {
                         return (
-                            // <MapToCredits key={item.credit_id} item={item} config={config} />
+
                             <div key={index} className={config.type + '_list' + ' border'}>
                                 <div className={config.type + '_photo'}>
                                     <NavLink to={config.target + item.id} className='link'>
@@ -125,7 +126,7 @@ const List = ({ data, type, id }) => {
                     } else { return null }
 
                 })}
-                {(data && data.length > 0) // Если id передан, покажем кнопку ЕЩЕ, если нет - это полный список
+                {(data && data.length > count) // Если id передан, покажем кнопку ЕЩЕ, если нет - это полный список
                     ? id &&
                     <div className={config.type + '_list border'}>
                         <NavLink to={config.more_link + id} className='link'>
@@ -137,6 +138,8 @@ const List = ({ data, type, id }) => {
                 {data && data.length === 0 && 'Нет данных'}
 
             </div>
+            </>
+            }
         </>
     )
 }

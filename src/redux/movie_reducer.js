@@ -182,6 +182,17 @@ export const getDetails = (movie_id) => async (dispatch) => {
 }
 
 
+export const rateMovie = (request_body) => async (dispatch) => {
+
+    await movie_api.rateMovie(request_body)
+        .then(response => {
+            console.log('rating', response);
+           
+            
+        })
+}
+
+
 
 export const getCredits = (movie_id) => (dispatch) => {
 

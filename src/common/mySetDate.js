@@ -1,4 +1,4 @@
-const mySetDate = (d) => {
+const mySetDate = (d, locate='ru') => {
     const options = {
         year: 'numeric',
         month: 'numeric',
@@ -8,7 +8,7 @@ const mySetDate = (d) => {
         // second: 'numeric',
         timezone: 'UTC'
     };
-    return d==='' ? null : new Date(d).toLocaleString("fr-CA", options);
+    return d==='' ? null : new Date(d).toLocaleString(locate, options);
 }
 
 
