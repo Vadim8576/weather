@@ -53,7 +53,7 @@ let App = ({ fetchWeather, ...props }) => {
           <Route exact path='/people/:people_id?' render={withSuspense(PeopleInfo)} />
           <Route exact path='/search/:s_query=:s_query?' render={withSuspense(Search)} />
           <Route exact path='/login' render={withSuspense(Login)} />
-          <Route exact path='/profile' render={() => withSuspense(Profile)} />
+          <Route exact path='/profile' render={withSuspense(Profile)} />
 
           <Route exact path='/popular-movies' render={() => <PopularMovies />} />
           <Route exact path='/now-playing' render={withSuspense(NowPlaying)} />

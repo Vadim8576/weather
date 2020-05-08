@@ -36,8 +36,6 @@ const Navigation = ({ isAuth, found_movies, searchMoviesDropdown, found_movies_d
         }
     }
 
-
-
     const dropDownSearch = (value) => {
         setValue(value);
 
@@ -49,10 +47,6 @@ const Navigation = ({ isAuth, found_movies, searchMoviesDropdown, found_movies_d
             setVisible({ visible: false, class: '' });
         }
     }
-
-
-
-
 
 
 
@@ -75,15 +69,16 @@ const Navigation = ({ isAuth, found_movies, searchMoviesDropdown, found_movies_d
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
                         </NavDropdown>
 
+
                     <NavItem link='/people' item='Люди' />
 
-                    {isAuth &&
+                    {/* {isAuth && */}
                         <NavItem link='/profile' item='Профиль' />
-                    }
+                    {/* }
                     {isAuth
-                        ? ''
+                        ? '' */}
                         : <NavItem link='/login' item='Вход' />
-                    }
+                    {/* } */}
 
                 </Nav>
 

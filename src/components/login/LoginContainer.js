@@ -8,6 +8,7 @@ let Login = ({ request_token, getAuth, authentication, ...props }) => {
 
     const auth = (e) => {
 
+        // console.log(e.target);
         // let form_data = {
         //     "username": e.target.username.value,
         //     "password": e.target.pass.value,
