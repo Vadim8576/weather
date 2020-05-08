@@ -62,11 +62,11 @@ export const authentication = (data) => (dispatch) => {
                 // }
 
 
-                let request_body = {
-                    "username": 'ZhVA',
-                    "password": 'vadik250783',
-                    "request_token": request_token
-                }
+                // let request_body = {
+                //     "username": 'ZhVA',
+                //     "password": 'vadik250783',
+                //     "request_token": request_token
+                // }
 
                 dispatch(getAuth(request_body));
                     
