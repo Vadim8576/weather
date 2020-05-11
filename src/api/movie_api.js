@@ -47,6 +47,12 @@ export const movie_api = {
                 .post(id + '/rating?' + api_key + '&session_id=' + session_id, {'value': rate})
                 .then(response => response.data)
                 
+    },
+
+    getAccountStates({session_id, id}) {
+        return instanse
+                .get(id+'/account_states?'+api_key+'&session_id='+session_id)
+                .then(response => response.data)
     }
 }
 

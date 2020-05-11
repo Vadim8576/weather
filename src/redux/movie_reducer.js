@@ -11,6 +11,8 @@ const FETCHING_MOVIE_DETAILES = 'FETCHING_MOVIE_DETAILES';
 const FETCHING_CREDITS = 'FETCHING_CREDITS';
 const FETCHING_RELEASES = 'FETCHING_RELEASES';
 const FETCHING_GENRE = 'FETCHING_GENRE';
+const SET_YOUR_RATE = 'SET_YOUR_RATE';
+
 
 
 let initialState = {
@@ -25,7 +27,8 @@ let initialState = {
     credits_isFetching: false,
     releases: [],
     releases_isFetching: false,
-    genre: []
+    genre: [],
+    your_rate: null
 };
 
 
@@ -33,6 +36,12 @@ let initialState = {
 const movie_reducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case SET_YOUR_RATE:
+            return {
+                ...state,
+                your_rate: action.payload
+            };
+
         case FETCHING_GENRE:
             return {
                 ...state,
@@ -102,6 +111,7 @@ const fetchingMovieDetailes = (payload) => ({ type: FETCHING_MOVIE_DETAILES, pay
 const genreFetching = (payload) => ({ type: FETCHING_GENRE, payload });
 const setCreditsAC = (payload) => ({ type: FETCHING_CREDITS, payload });
 const setReleasesAC = (payload) => ({ type: FETCHING_RELEASES, payload });
+const setYourRate = (payload) => ({ type: SET_YOUR_RATE, payload });
 const movie_info_isFetching = () => ({ type: MOVIE_INFO_IS_FETCHING });
 
 
@@ -206,6 +216,18 @@ export const getCredits = (movie_id) => (dispatch) => {
         })
 }
 
+
+export const getAccountStates = (payload) => (dispatch) => {
+
+    movie_api.getAccountStates(payload)
+        .then(response => {
+
+            console.log('AccountStates', response);
+
+            dispatch(setYourRate(response.rated.value));
+
+        })
+}
 
 
 

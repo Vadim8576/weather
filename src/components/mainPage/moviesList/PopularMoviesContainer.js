@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getGenres } from '../../../redux/genres_reducer';
 import { getDiscoverMovies, setRequestData, setRequestDataGenreIds, discoverMoviesIsFetching } from '../../../redux/discover_reducer';
 import { setCurrentPage } from '../../../redux/pagination_reducer';
-import { rateMovie } from '../../../redux/movie_reducer';
+import { rateMovie, getAccountStates } from '../../../redux/movie_reducer';
 import FilterPanel from './FilterPanel';
 import MoviesList from './MoviesList';
 
@@ -23,6 +23,8 @@ const PopularMovies = ({ discover_movies,
     isAuth,
     rateMovie,
     session_id,
+    getAccountStates,
+    your_rate,
     ...props }) => {
 
 
@@ -70,6 +72,8 @@ const PopularMovies = ({ discover_movies,
                     isAuth={isAuth}
                     rateMovie={rateMovie}
                     session_id={session_id}
+                    getAccountStates={getAccountStates}
+                    your_rate={your_rate}
                     {...props}
                 />
             </div>
@@ -89,6 +93,7 @@ const mapStateToProps = state => ({
     total_results: state.pagination.total_results,
     isAuth: state.auth.isAuth,
     session_id: state.auth.session_id,
+    your_rate: state.movies.your_rate
 
 })
 
@@ -104,5 +109,6 @@ export default connect(mapStateToProps,
         setRequestDataGenreIds,
         getDiscoverMovies,
         discoverMoviesIsFetching,
-        rateMovie
+        rateMovie,
+        getAccountStates
     })(PopularMovies);

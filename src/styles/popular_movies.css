@@ -105,19 +105,39 @@
     position: relative;
 }
 
-.card_wrapp .rate {
+.card_wrapp .rate_btn {
     position: absolute;
     top: 25px;
     right: 35px;
     z-index: 50;
 }
 
-.card_wrapp .rate .btn {
+.card_wrapp .rate_btn button {
    height: 40px;
    width: 40px;
    background-color: rgb(27, 212, 42);
    border-radius: 50%;
 }
+
+
+.rate_drop_down {
+    display: none;
+}
+
+.rate_drop_down.visible {
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    top: 80px;
+    left: 0;
+    z-index: 51;
+    padding: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+}
+
+
 
 .card {
     padding: 10px;

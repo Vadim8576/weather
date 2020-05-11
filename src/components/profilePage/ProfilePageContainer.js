@@ -27,6 +27,7 @@ const ProfilePageContainer = ( {authentication, rated_movies, getDetails, accoun
     return (
         <div>
             Привет, {user_name}. Твой id={account_id}
+            <h4>Мои рейтинги:</h4>
             <List id={null} data={rated_movies} type={{context: 'people cast', view: 'vertical'}} />
         </div>
     )
