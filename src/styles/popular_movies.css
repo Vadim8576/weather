@@ -113,11 +113,13 @@
 }
 
 .card_wrapp .rate_btn button {
-   height: 40px;
-   width: 40px;
-   background-color: rgb(27, 212, 42);
+   height: 35px;
+   width: 35px;
    border-radius: 50%;
+   border: 1px #000 solid;
+   background-color: rgb(255, 255, 255);
 }
+
 
 
 .rate_drop_down {

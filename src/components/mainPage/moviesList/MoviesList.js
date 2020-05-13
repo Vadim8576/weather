@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './../../../styles/popular_movies.css';
 import { Spinner, Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import PaginationButtons from '../../pagination/PaginationButtons';
@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 
 
 
-const MoviesList = ({ discover_movies_is_fetching, list, isAuth, session_id, rateMovie, getAccountStates, your_rate, ...props }) => {
+const MoviesList = ({ discover_movies_is_fetching, list, isAuth, session_id, setRateMovie, accountStates, your_rate, ...props }) => {
     // debugger;
 
 
@@ -23,8 +23,8 @@ const MoviesList = ({ discover_movies_is_fetching, list, isAuth, session_id, rat
                         data={list}
                         isAuth={isAuth}
                         session_id={session_id}
-                        rateMovie={rateMovie}
-                        getAccountStates={getAccountStates}
+                        setRateMovie={setRateMovie}
+                        accountStates={accountStates}
                         your_rate={your_rate}
                         />
                     : <Spinner animation='border' />
@@ -39,11 +39,23 @@ const MoviesList = ({ discover_movies_is_fetching, list, isAuth, session_id, rat
 
 
 
-const Cards = ({ data, isAuth, rateMovie, session_id, getAccountStates, your_rate }) => {
+const Cards = ({ data, isAuth, setRateMovie, session_id, accountStates, your_rate }) => {
 
 
-    const [rate, setRate] = useState(10);
+    console.log('isAuth=', isAuth);
+
+
+    const [rate, setRate] = useState(0);
     const [rateVisibleId, setRateVisibleId] = useState(null);
+
+    useEffect(() => {
+        setRate(your_rate ? your_rate : 5);
+    }, [your_rate]);
+
+
+
+  
+
     // console.log('isAuth=', isAuth);
 
     // const popover = (
@@ -80,7 +92,7 @@ const Cards = ({ data, isAuth, rateMovie, session_id, getAccountStates, your_rat
                                 <button onClick={() => {
                                     console.log(item.id);
                                     const id = item.id;
-                                    rateMovie({ id, session_id, rate });
+                                    setRateMovie({ id, session_id, rate });
                                     setRateVisibleId(null);
                                 }
                                 }>Оценить</button>
@@ -95,11 +107,15 @@ const Cards = ({ data, isAuth, rateMovie, session_id, getAccountStates, your_rat
 
                     <div className='rate_btn'>
 
-                        <button variant='success' onClick={() => {
+                        <button onClick={() => {
                             rateVisibleId ? setRateVisibleId(null) : setRateVisibleId(item.id);
                             const id = item.id;
-                            if(isAuth) getAccountStates({id , session_id});
-                        }}>&#9733;</button>
+                            accountStates({id, session_id});
+                        }}>
+                            {/* &#9733; */}
+                            &#9660;
+                           
+                            </button>
                       
                     </div>
 

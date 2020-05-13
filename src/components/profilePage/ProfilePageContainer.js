@@ -19,7 +19,7 @@ const ProfilePageContainer = ( {authentication, rated_movies, getDetails, accoun
     }, []);
 
     useEffect(() => {
-        getDetails(session_id);
+        if(session_id) getDetails(session_id);
     }, [session_id]);
 
 

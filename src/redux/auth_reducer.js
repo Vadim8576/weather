@@ -1,13 +1,13 @@
 import { auth_api } from '../api/auth_api';
 
-const GET_REQUEST_TOKEN = 'GET_REQUEST_TOKEN';
+const SET_REQUEST_TOKEN = 'SET_REQUEST_TOKEN';
 const AUTH_IS_SUCCES = 'AUTH_IS_SUCCES';
 const SET_SESSION_ID = 'SET_SESSION_ID';
 
 let initialState = {
-    request_token: '',
-    username: '',
-    session_id: '',
+    request_token: null,
+    username: null,
+    session_id: null,
     isAuth: false
 };
 
@@ -15,7 +15,7 @@ let initialState = {
 const auth_reducer = (state = initialState, action) => {
 
     switch(action.type) {
-        case GET_REQUEST_TOKEN:
+        case SET_REQUEST_TOKEN:
             return {
                 ...state,
                 request_token: action.payload
@@ -39,7 +39,7 @@ const auth_reducer = (state = initialState, action) => {
 
 
 
-export const getTokenAC = (payload) => ( {type: GET_REQUEST_TOKEN, payload} );
+export const setTokenAC = (payload) => ( {type: SET_REQUEST_TOKEN, payload} );
 export const auth_is_success = (payload) => ( {type: AUTH_IS_SUCCES, payload} );
 export const setSessionId = (payload) => ( {type: SET_SESSION_ID, payload} );
 
@@ -51,9 +51,9 @@ export const authentication = (data) => (dispatch) => {
         return auth_api.getToken()
             .then(request_token => {
                
-                dispatch(getTokenAC(request_token));
+                dispatch(setTokenAC(request_token));
 
-                console.log({request_token});
+                console.log('1-getToken',{request_token});
 
                 // let request_body = {
                 //     "username": data.username,
@@ -79,7 +79,7 @@ export const getAuth = (request_body) => (dispatch) => {
     
     return auth_api.getAuth(request_body)
         .then(response => {
-            console.log('LogIn=', response);
+            console.log('2-getAuth=', response.data);
             dispatch(auth_is_success(request_body.username));
 
             dispatch(createSession(response.data.request_token));
@@ -91,7 +91,7 @@ export const createSession = (request_body) => (dispatch) => {
     
     return auth_api.createSession(request_body)
         .then(response => {
-            console.log('createSession=', response.data);
+            console.log('3-createSession=', response.data);
             
             dispatch(setSessionId(response.data.session_id));
 

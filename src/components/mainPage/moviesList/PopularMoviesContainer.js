@@ -10,22 +10,26 @@ import MoviesList from './MoviesList';
 
 
 
-const PopularMovies = ({ discover_movies,
-    getDiscoverMovies,
-    discover_movies_is_fetching,
-    popular_movies, popular_movies_isFetching,
-    getGenres,
-    genres,
-    setRequestData,
-    request,
-    setRequestDataGenreIds,
-    discoverMoviesIsFetching,
-    isAuth,
-    rateMovie,
-    session_id,
-    getAccountStates,
-    your_rate,
-    ...props }) => {
+const PopularMovies = (
+    {
+        discover_movies,
+        getDiscoverMovies,
+        discover_movies_is_fetching,
+        popular_movies,
+        popular_movies_isFetching,
+        getGenres,
+        genres,
+        setRequestData,
+        request,
+        setRequestDataGenreIds,
+        discoverMoviesIsFetching,
+        isAuth,
+        rateMovie,
+        session_id,
+        getAccountStates,
+        your_rate,
+        ...props
+    }) => {
 
 
 
@@ -50,6 +54,17 @@ const PopularMovies = ({ discover_movies,
     }, []);
 
 
+    const setRateMovie = ({ id, session_id, rate }) => {
+        if (isAuth) rateMovie({ id, session_id, rate });
+    }
+
+    const accountStates = ({ id, session_id }) => {
+        if(isAuth) getAccountStates({ id, session_id });
+    }
+
+
+
+
     return (
         <>
             <div className='tittle'>
@@ -70,9 +85,9 @@ const PopularMovies = ({ discover_movies,
                     discover_movies_is_fetching={discover_movies_is_fetching}
                     list={discover_movies}
                     isAuth={isAuth}
-                    rateMovie={rateMovie}
+                    setRateMovie={setRateMovie}
                     session_id={session_id}
-                    getAccountStates={getAccountStates}
+                    accountStates={accountStates}
                     your_rate={your_rate}
                     {...props}
                 />
