@@ -8,6 +8,10 @@ import { rateMovie, getAccountStates } from '../../../redux/movie_reducer';
 import FilterPanel from './FilterPanel';
 import MoviesList from './MoviesList';
 
+// временно
+import { getDetails } from './../../../redux/account_reducer';
+import { authentication } from './../../../redux/auth_reducer';
+///////
 
 
 const PopularMovies = (
@@ -28,8 +32,22 @@ const PopularMovies = (
         session_id,
         getAccountStates,
         your_rate,
+
+        getDetails,
+        authentication,
+
         ...props
     }) => {
+
+// Временно
+    useEffect(() => {
+        authentication();
+    }, []);
+
+    useEffect(() => {
+        if(session_id) getDetails(session_id);
+    }, [session_id]);
+///////////////////////
 
 
 
@@ -108,7 +126,10 @@ const mapStateToProps = state => ({
     total_results: state.pagination.total_results,
     isAuth: state.auth.isAuth,
     session_id: state.auth.session_id,
-    your_rate: state.movies.your_rate
+    your_rate: state.movies.your_rate,
+
+
+    session_id: state.auth.session_id
 
 })
 
@@ -125,5 +146,11 @@ export default connect(mapStateToProps,
         getDiscoverMovies,
         discoverMoviesIsFetching,
         rateMovie,
-        getAccountStates
+        getAccountStates,
+
+
+        getDetails,
+        authentication
+
+
     })(PopularMovies);

@@ -3,6 +3,7 @@ import './../../../styles/popular_movies.css';
 import { Spinner, Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import PaginationButtons from '../../pagination/PaginationButtons';
 import { NavLink } from 'react-router-dom';
+import RateStars from './rateStars';
 // import { fetchingPopularMovies } from '../../redux/movie_reducer';
 
 
@@ -53,31 +54,10 @@ const Cards = ({ data, isAuth, setRateMovie, session_id, accountStates, your_rat
     }, [your_rate]);
 
 
-
+    const rateMovie = ({id, rate}) => {
+        setRateMovie({ id, session_id, rate });
+    }
   
-
-    // console.log('isAuth=', isAuth);
-
-    // const popover = (
-    //     <Popover id="popover-basic">
-    //         <Popover.Title as="h3">Ваш рейтинг</Popover.Title>
-    //         <Popover.Content>
-
-    //             {isAuth
-    //                 ? <><input type="number" value={rate} onChange={(e) => setRate(e.currentTarget.value)} step='0.5' min='0.5' max='10' />
-    //                     <button onClick={() => rateMovie()}>Оценить</button>
-    //                 </>
-    //                 : <>
-    //                     <p>Хотите оценить?</p>
-    //                     <NavLink to='login' className='navbar-brand'>Войти</NavLink>
-    //                 </>
-
-    //             }
-
-    //         </Popover.Content>
-    //     </Popover>
-
-    // )
 
     return (
         <>
@@ -87,15 +67,24 @@ const Cards = ({ data, isAuth, setRateMovie, session_id, accountStates, your_rat
                     <div className={`rate_drop_down border ${rateVisibleId === item.id ? 'visible' : ''}`}>
                         {isAuth
                             ? <>
-                                <p>Ваш рейтинг: {your_rate}</p>
+                                {/* <p>Ваш рейтинг: {your_rate}</p>
                                 <input type="number" value={rate} onChange={(e) => setRate(e.currentTarget.value)} step='0.5' min='0.5' max='10' />
                                 <button onClick={() => {
                                     console.log(item.id);
                                     const id = item.id;
-                                    setRateMovie({ id, session_id, rate });
+                                    rateMovie({ id, session_id, rate });
                                     setRateVisibleId(null);
                                 }
-                                }>Оценить</button>
+                                }>Оценить</button> */}
+
+                                <RateStars
+                                    id={item.id}
+                                    rate={rate}
+                                    rateMovie={rateMovie}
+                                    your_rate={your_rate}
+                                    setRateVisibleId={setRateVisibleId}
+                                />
+
                             </>
                             : <>
                                 <p>Хотите оценить?</p>
@@ -108,9 +97,13 @@ const Cards = ({ data, isAuth, setRateMovie, session_id, accountStates, your_rat
                     <div className='rate_btn'>
 
                         <button onClick={() => {
+                            if(!rateVisibleId){
+                                const id = item.id;
+                                accountStates({id, session_id});
+                            }
+
                             rateVisibleId ? setRateVisibleId(null) : setRateVisibleId(item.id);
-                            const id = item.id;
-                            accountStates({id, session_id});
+                            
                         }}>
                             {/* &#9733; */}
                             &#9660;

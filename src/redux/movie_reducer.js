@@ -194,10 +194,20 @@ export const getDetails = (movie_id) => async (dispatch) => {
 
 export const rateMovie = (request_body) => async (dispatch) => {
 
+    // request_body = {id, session_id, rate}
+
     await movie_api.rateMovie(request_body)
         .then(response => {
             console.log('rating', response);
+            // console.log('rating=', request_body.rate);
            
+            let payload = {
+                session_id: request_body.session_id,
+                id: request_body.id
+            };
+            // console.log('!!!!1=', payload);
+            
+            dispatch(setYourRate(request_body.rate));
             
         })
 }
@@ -223,6 +233,7 @@ export const getAccountStates = (payload) => (dispatch) => {
         .then(response => {
 
             console.log('AccountStates', response);
+            // console.log('AccountStates.rate=', response.rated.value);
 
             dispatch(setYourRate(response.rated.value));
 

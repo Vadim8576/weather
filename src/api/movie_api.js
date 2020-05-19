@@ -50,6 +50,7 @@ export const movie_api = {
     },
 
     getAccountStates({session_id, id}) {
+        console.log('!!!!1=', session_id, id);
         return instanse
                 .get(id+'/account_states?'+api_key+'&session_id='+session_id)
                 .then(response => response.data)

@@ -38,7 +38,7 @@ const mapStateToProps = state => ({
     account_id: state.account.account_id,
     user_name: state.account.user_name,
     rated_movies: state.account.rated_movies,
-    session_id: state.auth.session_id,
+    session_id: state.auth.session_id
 })
 
 
