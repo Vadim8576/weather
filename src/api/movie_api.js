@@ -48,6 +48,13 @@ export const movie_api = {
                 .then(response => response.data)
                 
     },
+    
+    rateMovieDelete({id, session_id}) {
+        return instanse
+                .delete(id + '/rating?' + api_key + '&session_id=' + session_id)
+                .then(response => response.data)
+                
+    },
 
     getAccountStates({session_id, id}) {
         console.log('!!!!1=', session_id, id);

@@ -46,3 +46,16 @@
 .rate_star.active {
     background-color: yellow;
 }
+
+.rate_star.red {
+    background-color: red;
+}
+
+.remove_rate {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    margin: 0 10px;
+}

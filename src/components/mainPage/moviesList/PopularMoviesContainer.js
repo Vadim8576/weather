@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getGenres } from '../../../redux/genres_reducer';
 import { getDiscoverMovies, setRequestData, setRequestDataGenreIds, discoverMoviesIsFetching } from '../../../redux/discover_reducer';
 import { setCurrentPage } from '../../../redux/pagination_reducer';
-import { rateMovie, getAccountStates } from '../../../redux/movie_reducer';
+import { rateMovie, getAccountStates, rateMovieDelete } from '../../../redux/movie_reducer';
 import FilterPanel from './FilterPanel';
 import MoviesList from './MoviesList';
 
@@ -32,12 +32,16 @@ const PopularMovies = (
         session_id,
         getAccountStates,
         your_rate,
+        rateMovieDelete,
 
         getDetails,
         authentication,
 
         ...props
     }) => {
+
+
+        console.log('props=', props);
 
 // Временно
     useEffect(() => {
@@ -96,6 +100,7 @@ const PopularMovies = (
                     genres={genres}
                     setRequestDataGenreIds={setRequestDataGenreIds}
                     getDiscoverMovies={getDiscoverMovies}
+                    {...props}
                 />
 
 
@@ -107,6 +112,7 @@ const PopularMovies = (
                     session_id={session_id}
                     accountStates={accountStates}
                     your_rate={your_rate}
+                    rateMovieDelete={rateMovieDelete}
                     {...props}
                 />
             </div>
@@ -147,6 +153,7 @@ export default connect(mapStateToProps,
         discoverMoviesIsFetching,
         rateMovie,
         getAccountStates,
+        rateMovieDelete,
 
 
         getDetails,

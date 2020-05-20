@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './../../../styles/popular_movies.css';
 import { Spinner, Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import PaginationButtons from '../../pagination/PaginationButtons';
@@ -9,9 +9,9 @@ import RateStars from './rateStars';
 
 
 
-const MoviesList = ({ discover_movies_is_fetching, list, isAuth, session_id, setRateMovie, accountStates, your_rate, ...props }) => {
+const MoviesList = ({ rateMovieDelete, discover_movies_is_fetching, list, isAuth, session_id, setRateMovie, accountStates, your_rate, ...props }) => {
     // debugger;
-
+    
 
     return (
         <div className='right_side'>
@@ -27,6 +27,7 @@ const MoviesList = ({ discover_movies_is_fetching, list, isAuth, session_id, set
                         setRateMovie={setRateMovie}
                         accountStates={accountStates}
                         your_rate={your_rate}
+                        rateMovieDelete={rateMovieDelete}
                         />
                     : <Spinner animation='border' />
                 }
@@ -40,24 +41,30 @@ const MoviesList = ({ discover_movies_is_fetching, list, isAuth, session_id, set
 
 
 
-const Cards = ({ data, isAuth, setRateMovie, session_id, accountStates, your_rate }) => {
+const Cards = ({ data, isAuth, setRateMovie, session_id, accountStates, your_rate, rateMovieDelete }) => {
 
 
     console.log('isAuth=', isAuth);
+    // console.log('default_rate', your_rate);
 
 
-    const [rate, setRate] = useState(0);
+    // const [rate, setRate] = useState(0);
     const [rateVisibleId, setRateVisibleId] = useState(null);
 
-    useEffect(() => {
-        setRate(your_rate ? your_rate : 5);
-    }, [your_rate]);
+    // useEffect(() => {
+    //     setRate(your_rate);
+    // }, [your_rate]);
 
 
     const rateMovie = ({id, rate}) => {
         setRateMovie({ id, session_id, rate });
     }
+
+    const rateMovieRemove = ({id}) => {
+        rateMovieDelete({ id, session_id });
+    }
   
+
 
     return (
         <>
@@ -79,10 +86,11 @@ const Cards = ({ data, isAuth, setRateMovie, session_id, accountStates, your_rat
 
                                 <RateStars
                                     id={item.id}
-                                    rate={rate}
+                                    // rate={rate}
                                     rateMovie={rateMovie}
                                     your_rate={your_rate}
                                     setRateVisibleId={setRateVisibleId}
+                                    rateMovieRemove={rateMovieRemove}
                                 />
 
                             </>

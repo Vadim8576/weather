@@ -4,9 +4,9 @@ import React from 'react';
 
 
 
-const FilterPanel = ({ request, setRequestData, genres, setRequestDataGenreIds, getDiscoverMovies }) => {
+const FilterPanel = ({ request, setRequestData, genres, setRequestDataGenreIds, getDiscoverMovies, ...props }) => {
 
-    // console.log('request=', request);
+    // console.log('props=', props);
 
     return (
         <>
@@ -15,7 +15,7 @@ const FilterPanel = ({ request, setRequestData, genres, setRequestDataGenreIds, 
                     <h6>Сортировка</h6>
                     <hr />
                     <p>Сортировать по:</p>
-                    <select value={request.sort_by} onChange={(e) => setRequestData({ sort_by: e.target.value })}>
+                    <select value={request.sort_by} onChange={(e) => setRequestData({ sort_by: e.target.value, btn_is_visible: true })}>
                         <option value='popularity.asc'>популярности (возрастание)</option>
                         <option value='popularity.desc'>популярности (убывание)</option>
                         <option value='original_title.asc'>названию (возрастание)</option>
@@ -52,6 +52,7 @@ const FilterPanel = ({ request, setRequestData, genres, setRequestDataGenreIds, 
                 <div className='request_btn' onClick={() => {
                     setRequestData({ btn_is_visible: false });
                     getDiscoverMovies(request);
+                    props.setCurrentPage(1);
                 }}>Применить</div>
             }
 

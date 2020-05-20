@@ -212,6 +212,15 @@ export const rateMovie = (request_body) => async (dispatch) => {
         })
 }
 
+export const rateMovieDelete = (request_body) => async (dispatch) => {
+
+    await movie_api.rateMovieDelete(request_body)
+        .then(response => {
+            console.log('rating delete', response);       
+            dispatch(setYourRate(null));    
+        })
+}
+
 
 
 export const getCredits = (movie_id) => (dispatch) => {
