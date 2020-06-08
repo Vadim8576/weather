@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { getGenres } from '../../../redux/genres_reducer';
 import { getDiscoverMovies, setRequestData, setRequestDataGenreIds, discoverMoviesIsFetching } from '../../../redux/discover_reducer';
 import { setCurrentPage } from '../../../redux/pagination_reducer';
-import { rateMovie, getAccountStates } from '../../../redux/movie_reducer';
+import { rateMovie, getAccountStates, rateMovieDelete } from '../../../redux/movie_reducer';
 import FilterPanel from './FilterPanel';
 import MoviesList from './MoviesList';
 import mySetDate from '../../../common/mySetDate';
 import mySelectDate from '../../../common/mySelectDate';
+import PaginationButtons from './../../pagination/PaginationButtons';
 
 
 
@@ -33,6 +34,9 @@ const UpcomingContainer = (
         session_id,
         getAccountStates,
         your_rate,
+        rateMovieDelete,
+        getDetails,
+        authentication,
         ...props
     }) => {
 
@@ -71,29 +75,36 @@ const UpcomingContainer = (
     return (
         <>
             <div className='tittle'>
-                <h5>Популярные фильмы на <a href='https://www.themoviedb.org' target='_blank'> TMDb</a>:</h5>
+                <h5>Ожидаемые фильмы на <a href='https://www.themoviedb.org' target='_blank'> TMDb</a>:</h5>
             </div>
             <div className='sides_wrapper'>
-
-                <FilterPanel
-                    request={request}
-                    setRequestData={setRequestData}
-                    genres={genres}
-                    setRequestDataGenreIds={setRequestDataGenreIds}
-                    getDiscoverMovies={getDiscoverMovies}
-                />
-
-
-                <MoviesList
-                    discover_movies_is_fetching={discover_movies_is_fetching}
-                    list={discover_movies}
-                    isAuth={isAuth}
-                    setRateMovie={setRateMovie}
-                    session_id={session_id}
-                    accountStates={accountStates}
-                    your_rate={your_rate}
-                    {...props}
-                />
+                <div className='left_side'>
+                    <FilterPanel
+                        request={request}
+                        setRequestData={setRequestData}
+                        genres={genres}
+                        setRequestDataGenreIds={setRequestDataGenreIds}
+                        getDiscoverMovies={getDiscoverMovies}
+                        {...props}
+                    />
+                </div>
+                <div className='right_side'>
+                    <PaginationButtons {...props} />
+                    <hr />
+                    <MoviesList
+                        discover_movies_is_fetching={discover_movies_is_fetching}
+                        data={discover_movies}
+                        isAuth={isAuth}
+                        setRateMovie={setRateMovie}
+                        session_id={session_id}
+                        accountStates={accountStates}
+                        your_rate={your_rate}
+                        rateMovieDelete={rateMovieDelete}
+                        {...props}
+                    />
+                    <hr />
+                    <PaginationButtons {...props} />
+                </div>
             </div>
         </>
     )
@@ -127,5 +138,6 @@ export default connect(mapStateToProps,
         getDiscoverMovies,
         discoverMoviesIsFetching,
         rateMovie,
-        getAccountStates
+        getAccountStates,
+        rateMovieDelete
     })(UpcomingContainer);

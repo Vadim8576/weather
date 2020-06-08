@@ -112,9 +112,11 @@
     z-index: 50;
 }
 
-.card_wrapp .rate_btn button {
+.rate_btn {
+    cursor: pointer;
    height: 35px;
    width: 35px;
+   padding: 7px;
    border-radius: 50%;
    border: 1px #000 solid;
    background-color: rgb(255, 255, 255);
@@ -124,19 +126,19 @@
 
 .rate_drop_down {
     display: none;
-}
-
-.rate_drop_down.visible {
-    display: block;
+    width: 280px;
+    height: 60px;
     position: absolute;
-    width: 200px;
-    /* height: 100px; */
     top: 80px;
     left: 0;
     z-index: 51;
     padding: 10px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
     background-color: #fff;
+}
+
+.rate_drop_down.visible {
+    display: block; 
 }
 
 

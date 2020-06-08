@@ -7,6 +7,7 @@ import { setCurrentPage } from '../../../redux/pagination_reducer';
 import { rateMovie, getAccountStates, rateMovieDelete } from '../../../redux/movie_reducer';
 import FilterPanel from './FilterPanel';
 import MoviesList from './MoviesList';
+import PaginationButtons from './../../pagination/PaginationButtons';
 
 // временно
 import { getDetails } from './../../../redux/account_reducer';
@@ -33,10 +34,8 @@ const PopularMovies = (
         getAccountStates,
         your_rate,
         rateMovieDelete,
-
         getDetails,
         authentication,
-
         ...props
     }) => {
 
@@ -93,28 +92,33 @@ const PopularMovies = (
                 <h5>Популярные фильмы на <a href='https://www.themoviedb.org' target='_blank'> TMDb</a>:</h5>
             </div>
             <div className='sides_wrapper'>
-
-                <FilterPanel
-                    request={request}
-                    setRequestData={setRequestData}
-                    genres={genres}
-                    setRequestDataGenreIds={setRequestDataGenreIds}
-                    getDiscoverMovies={getDiscoverMovies}
-                    {...props}
-                />
-
-
-                <MoviesList
-                    discover_movies_is_fetching={discover_movies_is_fetching}
-                    list={discover_movies}
-                    isAuth={isAuth}
-                    setRateMovie={setRateMovie}
-                    session_id={session_id}
-                    accountStates={accountStates}
-                    your_rate={your_rate}
-                    rateMovieDelete={rateMovieDelete}
-                    {...props}
-                />
+                <div className='left_side'>
+                    <FilterPanel
+                        request={request}
+                        setRequestData={setRequestData}
+                        genres={genres}
+                        setRequestDataGenreIds={setRequestDataGenreIds}
+                        getDiscoverMovies={getDiscoverMovies}
+                        {...props}
+                    />
+                </div>
+                <div className='right_side'>
+                    <PaginationButtons {...props} />
+                    <hr />
+                    <MoviesList
+                        discover_movies_is_fetching={discover_movies_is_fetching}
+                        data={discover_movies}
+                        isAuth={isAuth}
+                        setRateMovie={setRateMovie}
+                        session_id={session_id}
+                        accountStates={accountStates}
+                        your_rate={your_rate}
+                        rateMovieDelete={rateMovieDelete}
+                        {...props}
+                    />
+                    <hr />
+                    <PaginationButtons {...props} />
+                </div>
             </div>
         </>
     )
@@ -154,10 +158,6 @@ export default connect(mapStateToProps,
         rateMovie,
         getAccountStates,
         rateMovieDelete,
-
-
         getDetails,
         authentication
-
-
     })(PopularMovies);
