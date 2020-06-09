@@ -1,29 +1,24 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import RateStars from './rateStars';
 import { NavLink } from 'react-router-dom';
+import { NavDropdown } from 'react-bootstrap';
 
 
 
 
-const Card = ({item, session_id, rateMovie, rateMovieRemove, isAuth, your_rate, accountStates, rateVisibleId, setRateVisibleId}) => {
-   
+const Card = ({ item, session_id, rateMovie, rateMovieRemove, isAuth, your_rate, accountStates, rateVisibleId, setRateVisibleId }) => {
+
 
 
     return (
         <div className='card_wrapp'>
+            {/* <NavDropdown title="0" id="basic-nav-dropdown">
+
+            </NavDropdown> */}
             <div className={`rate_drop_down border ${rateVisibleId === item.id ? 'visible' : ''}`}>
                 {isAuth
                     ? <>
-                        {/* <p>Ваш рейтинг: {your_rate}</p>
-                                <input type="number" value={rate} onChange={(e) => setRate(e.currentTarget.value)} step='0.5' min='0.5' max='10' />
-                                <button onClick={() => {
-                                    console.log(item.id);
-                                    const id = item.id;
-                                    rateMovie({ id, session_id, rate });
-                                    setRateVisibleId(null);
-                                }
-                                }>Оценить</button> */}
-
+                        
                         <RateStars
                             id={item.id}
                             // rate={rate}
@@ -33,6 +28,7 @@ const Card = ({item, session_id, rateMovie, rateMovieRemove, isAuth, your_rate, 
                             rateMovieRemove={rateMovieRemove}
                         />
 
+
                     </>
                     : <>
                         <p>Хотите оценить?</p>
@@ -40,6 +36,9 @@ const Card = ({item, session_id, rateMovie, rateMovieRemove, isAuth, your_rate, 
                     </>
                 }
             </div>
+
+
+
 
             <div className='rate_btn' onClick={(e) => {
                 if (!rateVisibleId) {
@@ -69,7 +68,8 @@ const Card = ({item, session_id, rateMovie, rateMovieRemove, isAuth, your_rate, 
                     </div>
                 </div>
             </NavLink>
-        </div>)
+        </div>
+    )
 }
 
 

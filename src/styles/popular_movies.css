@@ -93,7 +93,7 @@
 
 .card_container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     padding-top: 10px;
@@ -120,25 +120,6 @@
    border-radius: 50%;
    border: 1px #000 solid;
    background-color: rgb(255, 255, 255);
-}
-
-
-
-.rate_drop_down {
-    display: none;
-    width: 280px;
-    height: 60px;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    z-index: 51;
-    padding: 10px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    background-color: #fff;
-}
-
-.rate_drop_down.visible {
-    display: block; 
 }
 
 

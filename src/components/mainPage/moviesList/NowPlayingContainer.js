@@ -141,5 +141,5 @@ export default connect(mapStateToProps,
         discoverMoviesIsFetching,
         rateMovie,
         getAccountStates,
-        rateMovieDelete
+        rateMovieDelete 
     })(NowPlayingContainer);

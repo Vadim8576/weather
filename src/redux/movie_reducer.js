@@ -3,6 +3,8 @@ import { config_api } from '../api/config_api';
 
 import {setTotalPages, setCurrentPage} from './pagination_reducer';
 
+import {getRatedMovies} from './account_reducer';
+
 
 const FETCHING_POPULAR_MOVIES = 'FETCHING_POPULAR_MOVIES';
 const MOVIE_INFO_IS_FETCHING = 'MOVIE_INFO_IS_FETCHING';
@@ -52,8 +54,6 @@ const movie_reducer = (state = initialState, action) => {
             return {
                 ...state,
                 popular_movies: action.payload.popular_movies,
-                // total_results: action.payload.total_results,
-                // total_pages: action.payload.total_pages,
                 popular_movies_isFetching: true
             };
 
@@ -201,10 +201,10 @@ export const rateMovie = (request_body) => async (dispatch) => {
             console.log('rating', response);
             // console.log('rating=', request_body.rate);
            
-            let payload = {
-                session_id: request_body.session_id,
-                id: request_body.id
-            };
+            // let payload = {
+            //     session_id: request_body.session_id,
+            //     id: request_body.id
+            // };
             // console.log('!!!!1=', payload);
             
             dispatch(setYourRate(request_body.rate));
@@ -217,7 +217,9 @@ export const rateMovieDelete = (request_body) => async (dispatch) => {
     await movie_api.rateMovieDelete(request_body)
         .then(response => {
             console.log('rating delete', response);       
-            dispatch(setYourRate(null));    
+            dispatch(setYourRate(null));  
+
+            // dispatch(getRatedMovies(null));    
         })
 }
 

@@ -70,7 +70,7 @@ const Navigation = ({ isAuth, found_movies, searchMoviesDropdown, found_movies_d
                         </NavDropdown>
 
 
-                    <NavItem link='/people' item='Люди' />
+                    <NavItem link='/person' item='Люди' />
 
                     {/* {isAuth && */}
                         <NavItem link='/profile' item='Профиль' />

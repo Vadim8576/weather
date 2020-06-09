@@ -58,7 +58,7 @@ const PopularMovies = (
     useEffect(() => {
        
         getDiscoverMovies(request, props.current_page);
-      }, [props.current_page, request.release_date_gte]);
+    }, [props.current_page, request.release_date_gte]);
 
     useEffect(() => {
         getGenres();
@@ -131,7 +131,7 @@ const mapStateToProps = state => ({
     request: state.discover.request,
     discover_movies_is_fetching: state.discover.discover_movies_is_fetching,
     discover_movies: state.discover.discover_movies,
-    current_page: state. pagination.current_page,
+    current_page: state.pagination.current_page,
     total_pages: state.pagination.total_pages,
     total_results: state.pagination.total_results,
     isAuth: state.auth.isAuth,

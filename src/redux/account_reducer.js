@@ -53,7 +53,7 @@ export const getDetails = (session_id) => (dispatch) => {
             console.log('id=', account_id);
             
             
-            dispatch(getRatedMovies({session_id, account_id}));
+            // dispatch(getRatedMovies({session_id, account_id}));
 
 
         })

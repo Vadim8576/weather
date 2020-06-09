@@ -26,6 +26,7 @@ const PeopleCrew = React.lazy(() => import('./components/mainPage/peopleInfo/Peo
 const Search = React.lazy(() => import('./components/mainPage/SearchContainer'));
 const NowPlaying = React.lazy(() => import('./components/mainPage/moviesList/NowPlayingContainer'));
 const Upcoming = React.lazy(() => import('./components/mainPage/moviesList/UpcomingContainer'));
+const Person = React.lazy(() => import('./components/mainPage/PersonContainer'));
 
 
 
@@ -58,7 +59,7 @@ let App = ({ fetchWeather, ...props }) => {
           <Route exact path='/popular-movies' render={() => <PopularMovies />} />
           <Route exact path='/now-playing' render={withSuspense(NowPlaying)} />
           <Route exact path='/upcoming' render={withSuspense(Upcoming)} />
-        
+          <Route exact path='/person' render={withSuspense(Person)} />
 
         </Switch>
 

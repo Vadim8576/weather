@@ -30,6 +30,14 @@ export const people_api = {
         return instanse
                 .get(id+'/images?' + api_key)
                 .then(response => response.data.profiles)
+    },
+
+    getPersonList(page) {
+        console.log('page = ', page);
+        const params = '&language=ru-RU&page=' + page;
+        return instanse
+                .get('popular?' + api_key + params)
+                .then(response => response.data)
     }
 }
 

@@ -12,7 +12,11 @@ const RateStars = ({rateMovie, id, your_rate, setRateVisibleId, rateMovieRemove}
         <div className='rate_stars_container border'>
             <div className='rate_star_wrap' onMouseOut={() => setnumberOfStars(null)}>
             
-            <div className='remove_rate border' onClick={() => rateMovieRemove({id})}></div>
+            <div className='remove_rate border' onClick={() => {
+                    setRateVisibleId(null);
+                    rateMovieRemove({id});
+                }
+            }></div>
                 {
                     stars.map((rate, index) => {
                         return (

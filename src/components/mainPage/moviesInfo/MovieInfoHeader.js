@@ -15,7 +15,7 @@ const MovieDetailsHeader = ({ movie_info }) => {
             <div className='poster'>
                 <img src={movie_info.poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${movie_info.poster_path}` : '/img/no_poster.jpg'} alt='постер' />
                 <div className='details_header_rate'>
-                    <p>Рейтинг: <Badge variant="info">{movie_info.vote_average ? movie_info.vote_average : '0'}</Badge></p>
+                    <p>Пользовательский рейтинг: <Badge variant="info">{movie_info.vote_average ? movie_info.vote_average : '0'}</Badge></p>
 
                     {movie_info.videos.results.length > 0 &&
                         <><hr /><p>Трейлеры:</p></>}
