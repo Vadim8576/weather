@@ -12,8 +12,11 @@ const MovieDetailsHeader = ({ movie_info }) => {
     return (
 
         <div className='details_header border'>
-            <div className='poster'>
-                <img src={movie_info.poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${movie_info.poster_path}` : '/img/no_poster.jpg'} alt='постер' />
+            <div className='details_header_left'>
+                <div className='poster'>
+                    <img src={movie_info.poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${movie_info.poster_path}` : '/img/no_poster.jpg'} alt='постер' />
+                </div>
+
                 <div className='details_header_rate'>
                     <p>Пользовательский рейтинг: <Badge variant="info">{movie_info.vote_average ? movie_info.vote_average : '0'}</Badge></p>
 
@@ -58,17 +61,17 @@ const MovieDetailsHeader = ({ movie_info }) => {
                 <p>Сборы: {movie_info.revenue ? movie_info.revenue + '$' : 'нет данных'}</p>
                 <p>Продолжительность: {movie_info.runtime ? movie_info.runtime + ' мин' : 'нет данных'}</p>
                 <p>Статус: {movie_info.status ? movie_info.status : 'нет данных'}</p>
-                
+
                 {movie_info.homepage
-                && <p><a href={movie_info.homepage} target='_blank' className='nav-link'>Домашняя страница</a></p>  
+                    && <p><a href={movie_info.homepage} target='_blank' className='nav-link'>Домашняя страница</a></p>
                 }
-                
+
                 {/* <p>Домашняя страница: {movie_info.homepage ? movie_info.homepage : 'нет данных'}</p> */}
                 {movie_info.overview
                     ? <>
                         <details>
-                        <summary>Краткое описание:</summary>
-                        <p>{movie_info.overview}</p>
+                            <summary>Краткое описание:</summary>
+                            <p>{movie_info.overview}</p>
                         </details>
                     </>
                     : 'Описание отсутствует'}

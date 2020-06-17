@@ -24,11 +24,12 @@ const PersonContainer = ({ person_list, person_isFetching, getPersonList, ...pro
             <h3>Популярные люди</h3>
 
             <PaginationButtons {...props} />
+            <hr />
             <div className='person_container'>
                 {person_isFetching
                     ? person_list.map(person => {
                         return (
-                            
+
                             <NavLink to={'/people/' + person.id} className='link' key={person.id}>
                                 <div className='person_card border'>
                                     <img src={
@@ -44,7 +45,7 @@ const PersonContainer = ({ person_list, person_isFetching, getPersonList, ...pro
                     : <Spinner animation='border' />
                 }
             </div>
-
+            <hr />
             <PaginationButtons {...props} />
         </>
     )
