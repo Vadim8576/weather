@@ -22,7 +22,7 @@ let MovieCasts = ({getCredits, getDetails, movie_info, credits, ...props}) => {
         <>
             <div className='realeases_header border'>
                 <div className='realeases_poster'>
-                    <NavLink to={`/movie_info/${props.match.params.movie_id}`} className='link'>
+                    <NavLink to={`/movie-info/${props.match.params.movie_id}`} className='link'>
                         <img src={movie_info.poster_path ? `https://image.tmdb.org/t/p/w220_and_h330_face${movie_info.poster_path}` : '/img/no_poster.jpg'} alt='постер' />
                         Вернуться
                     </NavLink>

@@ -88,7 +88,7 @@ const UpcomingContainer = (
                         {...props}
                     />
                 </div>
-                <div className='right_side'>
+                <div className='right_side border'>
                     <PaginationButtons {...props} />
                     <hr />
                     <MoviesList

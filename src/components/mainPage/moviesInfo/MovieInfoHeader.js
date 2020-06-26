@@ -24,7 +24,7 @@ const MovieDetailsHeader = ({ movie_info }) => {
                         <><hr /><p>Трейлеры:</p></>}
                     {movie_info.videos.results.map(i =>
                         <div key={i.id}>
-                            <a href={`https://www.themoviedb.org/video/play?key=${i.key}`}>
+                            <a href={`https://www.themoviedb.org/video/play?key=${i.key}`} target='_blank'>
                                 {i.name}
                             </a><br />
                         </div>

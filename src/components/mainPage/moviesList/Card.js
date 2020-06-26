@@ -40,7 +40,7 @@ const Card = ({ item, session_id, rateMovie, rateMovieRemove, isAuth, your_rate,
 
 
 
-            <div className='rate_btn' onClick={(e) => {
+            <div className='rate_btn border' onClick={(e) => {
                 if (!rateVisibleId) {
                     const id = item.id;
                     accountStates({ id, session_id });
@@ -51,7 +51,9 @@ const Card = ({ item, session_id, rateMovie, rateMovieRemove, isAuth, your_rate,
                 e.preventDefault();
                 e.stopPropagation();
             }}>
-                &#9660;
+                {/* &#9660; */}
+                {/* сердечко &#10084; */}
+                &#9733;
             </div>
 
             <NavLink to={`/movie-info/${item.id}`} className='navbar-brand'>
@@ -60,11 +62,12 @@ const Card = ({ item, session_id, rateMovie, rateMovieRemove, isAuth, your_rate,
                         <img src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : '/img/no_poster.jpg'} alt='популярный фильм' />
 
 
-                        {/* <div className='description'>
-                                <span><b>{item.title}</b></span>
+                            <div className='description'>
+                                <span>{item.title}</span>
+                                <br />
                                 <span><i>{item.release_date}</i></span>
                                 <span>Рейтинг: {item.vote_average}</span>
-                            </div> */}
+                            </div>
                     </div>
                 </div>
             </NavLink>
