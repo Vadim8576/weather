@@ -18,7 +18,7 @@ const PersonContainer = ({ person_list, person_isFetching, getPersonList, ...pro
 
         getPersonList(props.current_page);
     }, [props.current_page]);
-
+//
     return (
         <>
             <h3>Популярные люди</h3>
